@@ -21,6 +21,10 @@ import Goals from "./components/WhoWeAre/Goals";
 import AiHeader from "./components/Ai/AIHeader";
 import ContactUs from "./components/Contact/Contactus";
 import Course from "./components/CoursePage/Course";
+import Header from "./components/JobPage/Header";
+
+import JobApplyPage from "./components/JobPage/JobApplyPage";
+import RecommendedJobs from "./components/JobPage/RecommendedJobs";
 
 const App = () => {
   return (
@@ -120,6 +124,17 @@ const App = () => {
           element={
             <div>
               <ContactUs/>
+            </div>
+          }
+        />
+        <Route
+          path="/job"
+          element={
+            <div>
+              <Header/>
+              
+              <JobApplyPage/>
+              <RecommendedJobs/>
             </div>
           }
         />

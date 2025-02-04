@@ -11,7 +11,7 @@ const PracticeQuiz = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-gray-50 py-14 flex flex-col md:flex-row">
       {/* Sidebar */}
       <aside className="w-full md:w-1/4 bg-white border-r border-gray-200 p-4">
         <h2 className="text-lg font-bold text-gray-800 mb-4">PRACTICE QUIZ</h2>
