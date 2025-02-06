@@ -2,126 +2,131 @@ import React, { useState } from "react";
 
 const courses = [
   {
-    title: "MATLAB and VLSI Foundations",
-    description:
-      "This course offers a comprehensive introduction to the fundamentals of MATLAB and its application in the field of VLSI. It is designed for beginners who want to understand the basics of MATLAB programming and learn how to apply it effectively for solving VLSI design challenges, from basic circuit modeling to preliminary simulations.",
-    images: [
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-    ],
-    duration: "4 Weeks",
-    level: "Beginner",
-    instructor: "By John Smith",
-    curriculum: [
-      "Introduction to MATLAB",
-      "Basic Circuit Modeling",
-      "Simulation Techniques",
-      "VLSI Design Basics",
-      "Advanced MATLAB Tools",
-    ],
+      title: "MATLAB and VLSI Foundations",
+      description:
+          "This course offers a comprehensive introduction to the fundamentals of MATLAB and its application in the field of VLSI...",
+      images: [
+          "https://cdn.pixabay.com/photo/2025/02/05/08/57/circuit-9383740_1280.jpg",
+          "https://cdn.pixabay.com/photo/2025/02/05/08/57/circuit-9383740_1280.jpg",
+          "https://cdn.pixabay.com/photo/2025/02/05/08/57/circuit-9383740_1280.jpg",
+      ],
+      duration: "4 Weeks",
+      level: "Beginner",
+      instructor: "By John Smith",
+      curriculum: [
+          "Introduction to MATLAB",
+          "Basic Circuit Modeling",
+          "Simulation Techniques",
+          "VLSI Design Basics",
+          "Advanced MATLAB Tools",
+      ],
   },
   {
-    title: "VLSI Design Using MATLAB",
-    description:
-      "Explore the integration of MATLAB in designing VLSI circuits, from conceptualization to implementation. This course focuses on how MATLAB’s computational capabilities can streamline the design process, offering practical insights into circuit behavior, timing analysis, and logic design optimization.",
-    images: [
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-    ],
-    duration: "6 Weeks",
-    level: "Intermediate",
-    instructor: "By Emily Johnson",
-    curriculum: [
-      "Introduction to Circuit Timing",
-      "Behavioral Modeling",
-      "Optimization Techniques",
-      "Design Validation",
-      "MATLAB-Integrated Tools",
-    ],
+      title: "VLSI Design Using MATLAB",
+      description:
+          "Explore the integration of MATLAB in designing VLSI circuits, from conceptualization to implementation...",
+      images: [
+          "https://cdn.pixabay.com/photo/2016/06/08/05/45/circuit-1443256_1280.jpg",
+          "https://cdn.pixabay.com/photo/2016/06/08/05/45/circuit-1443256_1280.jpg",
+          "https://cdn.pixabay.com/photo/2016/06/08/05/45/circuit-1443256_1280.jpg",
+        
+      ],
+      duration: "6 Weeks",
+      level: "Intermediate",
+      instructor: "By Emily Johnson",
+      curriculum: [
+          "Introduction to Circuit Timing",
+          "Behavioral Modeling",
+          "Optimization Techniques",
+          "Design Validation",
+          "MATLAB-Integrated Tools",
+      ],
   },
   {
-    title: "Responsive Web Design",
-    description:
-      "Learn how to create responsive websites that look stunning on any device. This course covers foundational web development concepts, including HTML, CSS, and responsive design principles, along with hands-on projects to test your skills.",
-    images: [
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-    ],
-    duration: "5 Weeks",
-    level: "Beginner",
-    instructor: "By Alice Brown",
-    curriculum: [
-      "Introduction to HTML",
-      "Styling with CSS",
-      "Responsive Grid Systems",
-      "Media Queries",
-      "Building a Portfolio Website",
-    ],
+      title: "Responsive Web Design",
+      description:
+          "Learn how to create responsive websites that look stunning on any device...",
+      images: [
+          "https://cdn.pixabay.com/photo/2020/04/02/22/05/home-office-4996834_1280.jpg",
+          "https://cdn.pixabay.com/photo/2020/04/02/22/05/home-office-4996834_1280.jpg",
+          "https://cdn.pixabay.com/photo/2020/04/02/22/05/home-office-4996834_1280.jpg",
+          
+      ],
+      duration: "5 Weeks",
+      level: "Beginner",
+      instructor: "By Alice Brown",
+      curriculum: [
+          "Introduction to HTML",
+          "Styling with CSS",
+          "Responsive Grid Systems",
+          "Media Queries",
+          "Building a Portfolio Website",
+      ],
   },
   {
-    title: "UI/UX Design Fundamentals",
-    description:
-      "Master the art of crafting user-friendly interfaces with this beginner-friendly course. Dive into user research, prototyping, wireframing, and more to create intuitive and visually appealing digital experiences.",
-    images: [
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-    ],
-    duration: "7 Weeks",
-    level: "Beginner",
-    instructor: "By Michael Green",
-    curriculum: [
-      "User Research",
-      "Wireframing Techniques",
-      "Prototyping Tools",
-      "Usability Testing",
-      "UI Design Patterns",
-    ],
+      title: "UI/UX Design Fundamentals",
+      description:
+          "Master the art of crafting user-friendly interfaces with this beginner-friendly course...",
+      images: [
+          "https://cdn.pixabay.com/photo/2025/02/05/08/57/circuit-9383740_1280.jpg",
+          "https://cdn.pixabay.com/photo/2025/02/05/08/57/circuit-9383740_1280.jpg",
+          "https://cdn.pixabay.com/photo/2025/02/05/08/57/circuit-9383740_1280.jpg",
+      ],
+      duration: "7 Weeks",
+      level: "Beginner",
+      instructor: "By Michael Green",
+      curriculum: [
+          "User Research",
+          "Wireframing Techniques",
+          "Prototyping Tools",
+          "Usability Testing",
+          "UI Design Patterns",
+      ],
   },
   {
-    title: "Data Structures and Algorithms",
-    description:
-      "Build a solid foundation in data structures and algorithms with this comprehensive course. Understand core concepts like arrays, linked lists, trees, and sorting algorithms, essential for coding interviews and real-world applications.",
-    images: [
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-    ],
-    duration: "8 Weeks",
-    level: "Advanced",
-    instructor: "By Sarah Williams",
-    curriculum: [
-      "Introduction to Arrays",
-      "Linked Lists and Trees",
-      "Sorting Algorithms",
-      "Graph Theory",
-      "Dynamic Programming",
-    ],
+      title: "Data Structures and Algorithms",
+      description:
+          "Build a solid foundation in data structures and algorithms with this comprehensive course...",
+      images: [
+          
+          "https://cdn.pixabay.com/photo/2015/12/04/14/05/code-1076536_1280.jpg",
+          "https://cdn.pixabay.com/photo/2015/12/04/14/05/code-1076536_1280.jpg",
+          "https://cdn.pixabay.com/photo/2015/12/04/14/05/code-1076536_1280.jpg",
+          
+      ],
+      duration: "8 Weeks",
+      level: "Advanced",
+      instructor: "By Sarah Williams",
+      curriculum: [
+          "Introduction to Arrays",
+          "Linked Lists and Trees",
+          "Sorting Algorithms",
+          "Graph Theory",
+          "Dynamic Programming",
+      ],
   },
   {
-    title: "Introduction to Machine Learning",
-    description:
-      "Step into the world of AI with this beginner-friendly course on Machine Learning. Learn the basics of supervised and unsupervised learning, model evaluation, and hands-on projects using Python libraries like Scikit-Learn.",
-    images: [
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-    ],
-    duration: "10 Weeks",
-    level: "Intermediate",
-    instructor: "By Daniel Carter",
-    curriculum: [
-      "Supervised Learning Basics",
-      "Unsupervised Learning",
-      "Model Evaluation Techniques",
-      "Hands-on with Scikit-Learn",
-      "Project: Predictive Analytics",
-    ],
+      title: "Introduction to Machine Learning",
+      description:
+          "Step into the world of AI with this beginner-friendly course on Machine Learning...",
+      images: [
+          "https://cdn.pixabay.com/photo/2025/02/05/08/57/circuit-9383740_1280.jpg",
+          "https://cdn.pixabay.com/photo/2025/02/05/08/57/circuit-9383740_1280.jpg",
+          "https://cdn.pixabay.com/photo/2025/02/05/08/57/circuit-9383740_1280.jpg",
+      ],
+      duration: "10 Weeks",
+      level: "Intermediate",
+      instructor: "By Daniel Carter",
+      curriculum: [
+          "Supervised Learning Basics",
+          "Unsupervised Learning",
+          "Model Evaluation Techniques",
+          "Hands-on with Scikit-Learn",
+          "Project: Predictive Analytics",
+      ],
   },
 ];
+
 
 const Course = () => {
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);

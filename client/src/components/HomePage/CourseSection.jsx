@@ -9,7 +9,7 @@ const CourseSection = () => {
       description:
         "Learn the fundamentals of MATLAB programming and VLSI design principles, including digital circuit design and simulation.",
       imgSrc:
-        "https://images.unsplash.com/photo-1578853302081-0cf1c7e32a94?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDh8fG1hdGxhYiUyMGV4cGVyaWVuY2V8ZW58MHx8fHwxNjk0NjMwMzc&ixlib=rb-1.2.1&q=80&w=1080",
+        "https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1080",
       buttonText: "Get it Now",
     },
     {
@@ -18,7 +18,7 @@ const CourseSection = () => {
       description:
         "Explore advanced topics in VLSI design using MATLAB. Focus on optimization, signal processing, and hardware design.",
       imgSrc:
-        "https://images.unsplash.com/photo-1521747116042-e0b4e1c4d6cc?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDd8fGNpcnYlMjBkZXNpZ258ZW58MHx8fHwxNjk0NjMwNDE&ixlib=rb-1.2.1&q=80&w=1080",
+        "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?q=80&w=1080",
       buttonText: "Get it Now",
     },
     {
@@ -27,7 +27,7 @@ const CourseSection = () => {
       description:
         "Learn how to use MATLAB for signal processing tasks, including Fourier transforms, filtering, and spectral analysis in VLSI applications.",
       imgSrc:
-        "https://images.unsplash.com/photo-1501698231274-c6da8e0c12eb?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGZpcmV8ZW58MHx8fHwxNjk0NjMwNzA&ixlib=rb-1.2.1&q=80&w=1080",
+        "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1080",
       buttonText: "Get it Now",
     },
     {
@@ -36,7 +36,7 @@ const CourseSection = () => {
       description:
         "Design and simulate digital circuits using MATLAB. Learn to create digital systems, such as multiplexers, flip-flops, and counters.",
       imgSrc:
-        "https://images.unsplash.com/photo-1598884829892-0be2d7b14392?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDh8fGZpcnN0fGVufDB8fHx8fDE2OTQ2MzEwMTQ&ixlib=rb-1.2.1&q=80&w=1080",
+        "https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1080",
       buttonText: "Get it Now",
     },
     {
@@ -45,7 +45,7 @@ const CourseSection = () => {
       description:
         "Understand VLSI design automation techniques using MATLAB, including layout design, circuit simulation, and optimization algorithms.",
       imgSrc:
-        "https://images.unsplash.com/photo-1595926747586-f272b9e2737c?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGV4cGVyaWVuY2V8ZW58MHx8fHwxNjk0NjMwNzY&ixlib=rb-1.2.1&q=80&w=1080",
+        "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1080",
       buttonText: "Get it Now",
     },
     {
@@ -54,7 +54,7 @@ const CourseSection = () => {
       description:
         "Master the art of testing and verifying VLSI designs with MATLAB. Learn how to apply various testing techniques for digital circuits.",
       imgSrc:
-        "https://images.unsplash.com/photo-1604672424379-ecf13a244282?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fHZsc2l8ZW58MHx8fHwxNjk0NjMwNzg&ixlib=rb-1.2.1&q=80&w=1080",
+        "https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1080",
       buttonText: "Get it Now",
     },
     {
@@ -63,7 +63,7 @@ const CourseSection = () => {
       description:
         "Learn the principles of analog VLSI design, including operational amplifiers and voltage-controlled oscillators, using MATLAB.",
       imgSrc:
-        "https://images.unsplash.com/photo-1556922763-634df0efc81a?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDkwfHxhbmFsb2dfdmxzZHNlfGVufDB8fHx8fDE2OTQ2MzEwNzI&ixlib=rb-1.2.1&q=80&w=1080",
+        "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1080",
       buttonText: "Get it Now",
     },
     {
@@ -72,7 +72,7 @@ const CourseSection = () => {
       description:
         "Learn how to design and implement VLSI circuits using FPGA platforms in conjunction with MATLAB for simulation and verification.",
       imgSrc:
-        "https://images.unsplash.com/photo-1531843125955-fb99822cda2d?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDg4fHxhbmFsb2dfcGNpZ3xlbnwwfHx8fDE2OTQ2MzEyNzQ&ixlib=rb-1.2.1&q=80&w=1080",
+        "https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1080",
       buttonText: "Get it Now",
     },
     {
@@ -81,7 +81,7 @@ const CourseSection = () => {
       description:
         "Explore techniques for optimizing power consumption in VLSI designs with MATLAB, focusing on energy-efficient digital circuits.",
       imgSrc:
-        "https://images.unsplash.com/photo-1618301178787-d4de8a21e1a5?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fFZMSUklMjBwaW93ZXJ8ZW58MHx8fHwxNjk0NjMwNzk&ixlib=rb-1.2.1&q=80&w=1080",
+        "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1080",
       buttonText: "Get it Now",
     },
     {
@@ -90,10 +90,11 @@ const CourseSection = () => {
       description:
         "Gain hands-on experience in simulating VLSI circuits with MATLAB, learning techniques for functional simulation and performance analysis.",
       imgSrc:
-        "https://images.unsplash.com/photo-1503952857074-4c8406e2b36c?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDczfHxmY2lrdWlzcml8ZW58MHx8fHwxNjk0NjMwODg&ixlib=rb-1.2.1&q=80&w=1080",
+        "https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1080",
       buttonText: "Get it Now",
     },
   ];
+  
 
   return (
     <>

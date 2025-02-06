@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx"; // Import AuthContext
 import Course from "../CoursePage/Course";
 
-
 const Navbar = () => {
-  const { isLoggedIn, userId, logout, checkAuthStatus } = useContext(AuthContext);
+  const { isLoggedIn, userId, logout, checkAuthStatus } =
+    useContext(AuthContext);
   const navigate = useNavigate();
 
   // Check authentication status on component mount
@@ -26,27 +26,52 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-screen bg-white shadow-md flex justify-between items-center py-4 px-6 md:px-16 z-50">
       {/* Logo */}
-      <div className="flex items-center space-x-2">
-        <div className="bg-orange-500 text-white text-3xl p-2 rounded-full">⚡</div>
+      <div className="flex items-center space-x-3">
+        <div className="p-1 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 shadow-md">
+          <div className="bg-black text-white text-3xl p-3 rounded-full flex items-center justify-center">
+            ⚡
+          </div>
+        </div>
 
-        <span className="text-orange-500 font-bold text-xl md:text-2xl">
-          SkillEdge
+        <span className="text-orange-500 font-extrabold text-2xl md:text-3xl tracking-wide">
+          Skill-Sensei
         </span>
       </div>
 
       {/* Navigation Links */}
       <ul className="hidden md:flex space-x-6 text-gray-600 font-medium">
-        <li><Link to="/" className="cursor-pointer hover:text-orange-500">Home</Link></li>
-        <li><Link to="/courses" className="cursor-pointer hover:text-orange-500">Courses</Link></li>
-        <li><Link to="/who-we-are" className="cursor-pointer hover:text-orange-500">About Us</Link></li>
-        <li><Link to="/contact" className="cursor-pointer hover:text-orange-500">Contact</Link></li>
+        <li>
+          <Link to="/" className="cursor-pointer hover:text-orange-500">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to="/courses" className="cursor-pointer hover:text-orange-500">
+            Courses
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/who-we-are"
+            className="cursor-pointer hover:text-orange-500"
+          >
+            About Us
+          </Link>
+        </li>
+        <li>
+          <Link to="/contact" className="cursor-pointer hover:text-orange-500">
+            Contact
+          </Link>
+        </li>
       </ul>
 
       {/* Authentication/Profile Section */}
       <div className="flex items-center space-x-4">
         {isLoggedIn ? (
           <div className="flex items-center space-x-4">
-            <span className="text-gray-600 font-medium">Welcome, User #{userId}</span>
+            <span className="text-gray-600 font-medium">
+              Welcome, User #{userId}
+            </span>
             <button
               onClick={handleLogout}
               className="text-gray-600 font-medium px-4 py-2 rounded-md hover:text-orange-500 hover:bg-gray-100"
@@ -56,7 +81,10 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <Link to="/signup" className="text-gray-600 font-medium px-4 py-2 rounded-md hover:text-orange-500 hover:bg-gray-100">
+            <Link
+              to="/signup"
+              className="text-gray-600 font-medium px-4 py-2 rounded-md hover:text-orange-500 hover:bg-gray-100"
+            >
               Sign Up
             </Link>
             <button

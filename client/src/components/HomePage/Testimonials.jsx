@@ -28,34 +28,35 @@ const Testimonials = () => {
     {
       name: "Sarah L",
       text: "The web design course provided a solid foundation for me. The instructors were knowledgeable and supportive, and the interactive learning environment was engaging. I highly recommend it!",
-      image: "https://via.placeholder.com/150/FF0080",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&crop=faces&fit=crop",
     },
     {
       name: "Jason M",
       text: "The UI/UX design course exceeded my expectations. The instructor's expertise and practical assignments helped me improve my design skills. I feel more confident in my career now. Thank you!",
-      image: "https://via.placeholder.com/150/800080",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&crop=faces&fit=crop",
     },
     {
-      name: "Sarah L",
-      text: "The web design course provided a solid foundation for me. The instructors were knowledgeable and supportive, and the interactive learning environment was engaging. I highly recommend it!",
-      image: "https://via.placeholder.com/150/FF0080",
+      name: "Emily R",
+      text: "A fantastic learning experience! The interactive exercises and real-world examples helped solidify my understanding of UX design principles.",
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&crop=faces&fit=crop",
     },
     {
-      name: "Jason M",
-      text: "The UI/UX design course exceeded my expectations. The instructor's expertise and practical assignments helped me improve my design skills. I feel more confident in my career now. Thank you!",
-      image: "https://via.placeholder.com/150/800080",
+      name: "David K",
+      text: "The coding bootcamp was an incredible journey. The mentors were always there to help, and the hands-on projects prepared me for real-world development.",
+      image: "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=150&h=150&crop=faces&fit=crop",
     },
     {
-      name: "Sarah L",
-      text: "The web design course provided a solid foundation for me. The instructors were knowledgeable and supportive, and the interactive learning environment was engaging. I highly recommend it!",
-      image: "https://via.placeholder.com/150/FF0080",
+      name: "Sophia T",
+      text: "I loved the structured approach of the data science course. The blend of theory and practice was perfect for a beginner like me.",
+      image: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=150&h=150&crop=faces&fit=crop",
     },
     {
-      name: "Jason M",
-      text: "The UI/UX design course exceeded my expectations. The instructor's expertise and practical assignments helped me improve my design skills. I feel more confident in my career now. Thank you!",
-      image: "https://via.placeholder.com/150/800080",
+      name: "Michael B",
+      text: "A well-structured and insightful digital marketing course. It gave me a great start in the field and helped me land my first marketing job!",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&crop=faces&fit=crop",
     },
   ];
+
 
   return (
     <div className="bg-gray-50 px-4 py-12 md:px-8 lg:px-16">

@@ -7,7 +7,7 @@ const WhoWeAre = () => {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('https://source.unsplash.com/featured/?technology')`, // Replace with your image URL
+          backgroundImage: `url('https://cdn.pixabay.com/photo/2020/03/17/17/48/engineer-4941351_1280.jpg')`, // Replace with your image URL
         }}
       ></div>
 
