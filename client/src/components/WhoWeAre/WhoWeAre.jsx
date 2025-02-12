@@ -16,11 +16,11 @@ const WhoWeAre = () => {
 
       {/* Content */}
       <div className="relative z-10 flex items-center h-full px-6 md:px-16 lg:px-32">
-        <div className="max-w-lg text-white">
-          <h1 className="text-3xl md:text-4xl font-bold text-yellow-400 mb-4">
+        <div className="max-w-2xl text-white">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-yellow-400 mb-6">
             Who We Are
           </h1>
-          <p className="text-sm md:text-base leading-relaxed">
+          <p className="text-lg md:text-xl lg:text-2xl leading-relaxed">
             We are a dedicated team committed to empowering learners worldwide
             with cutting-edge resources in design, technology, and development.
             Our mission is to provide high-quality, accessible, and innovative

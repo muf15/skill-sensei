@@ -1,75 +1,57 @@
 import React from "react";
+import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-10">
-      <div className="container mx-auto px-6 md:flex md:justify-between md:items-start">
+    <footer className="bg-white py-8 px-4 md:px-20 text-gray-900">
+      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center md:items-start">
         {/* Left Section */}
         <div className="flex flex-col items-center md:items-start mb-6 md:mb-0">
-          <img
-            src="/path/to/logo.png"
-            alt="Logo"
-            className="w-16 h-16 mb-4 rounded-full bg-white p-1 shadow-lg"
-          />
-          <ul className="text-sm text-gray-400 space-y-2">
-            <li>
-              <a href="mailto:hello@skillbridge.com" className="hover:text-gray-200">
-                📧 hello@skillbridge.com
-              </a>
-            </li>
-            <li>
-              <a href="tel:+91918132309" className="hover:text-gray-200">
-                📞 +91 91813 23 2309
-              </a>
-            </li>
-            <li>📍 Somewhere in the World</li>
-          </ul>
+          <div className="bg-orange-500 p-3 rounded-full">
+            <img src="/logo.png" alt="Skillbridge Logo" className="w-8 h-8" />
+          </div>
+          <div className="mt-4 space-y-2 text-center md:text-left">
+            <p className="flex items-center gap-2"><MdEmail /> hello@skillbridge.com</p>
+            <p className="flex items-center gap-2"><MdPhone /> +91 91813 23 2309</p>
+            <p className="flex items-center gap-2"><MdLocationOn /> Somewhere in the World</p>
+          </div>
         </div>
 
         {/* Middle Section */}
-        <div className="flex justify-around md:space-x-16 w-full md:w-auto">
-          {/* Home Links */}
+        <div className="flex flex-wrap justify-center md:justify-start space-x-8 text-center md:text-left">
           <div>
-            <h3 className="font-semibold text-gray-300 mb-4">Home</h3>
-            <ul className="text-sm text-gray-400 space-y-2">
-              <li><a href="#" className="hover:text-gray-200">Benefits</a></li>
-              <li><a href="#" className="hover:text-gray-200">Our Courses</a></li>
-              <li><a href="#" className="hover:text-gray-200">Testimonials</a></li>
-              <li><a href="#" className="hover:text-gray-200">FAQ</a></li>
+            <h3 className="font-semibold">Home</h3>
+            <ul className="space-y-1 text-gray-600">
+              <li>Benefits</li>
+              <li>Our Courses</li>
+              <li>Our Testimonials</li>
+              <li>Our FAQ</li>
             </ul>
           </div>
-
-          {/* About Us Links */}
           <div>
-            <h3 className="font-semibold text-gray-300 mb-4">About Us</h3>
-            <ul className="text-sm text-gray-400 space-y-2">
-              <li><a href="#" className="hover:text-gray-200">Company</a></li>
-              <li><a href="#" className="hover:text-gray-200">Achievements</a></li>
-              <li><a href="#" className="hover:text-gray-200">Our Goals</a></li>
+            <h3 className="font-semibold">About Us</h3>
+            <ul className="space-y-1 text-gray-600">
+              <li>Company</li>
+              <li>Achievements</li>
+              <li>Our Goals</li>
             </ul>
           </div>
         </div>
 
         {/* Right Section */}
-        <div className="flex flex-col items-center md:items-end mt-6 md:mt-0">
-          <h3 className="font-semibold text-gray-300 mb-4">Follow Us</h3>
-          <div className="flex space-x-4">
-            <a href="#" className="bg-gray-700 p-3 rounded-full hover:bg-gray-600">
-              <img src="/path/to/facebook-icon.png" alt="Facebook" className="w-5 h-5" />
-            </a>
-            <a href="#" className="bg-gray-700 p-3 rounded-full hover:bg-gray-600">
-              <img src="/path/to/twitter-icon.png" alt="Twitter" className="w-5 h-5" />
-            </a>
-            <a href="#" className="bg-gray-700 p-3 rounded-full hover:bg-gray-600">
-              <img src="/path/to/linkedin-icon.png" alt="LinkedIn" className="w-5 h-5" />
-            </a>
+        <div className="flex flex-col items-center md:items-start">
+          <h3 className="font-semibold">Social Profiles</h3>
+          <div className="flex space-x-3 mt-2">
+            <FaFacebookF className="p-2 bg-gray-200 rounded-full w-8 h-8" />
+            <FaTwitter className="p-2 bg-gray-200 rounded-full w-8 h-8" />
+            <FaLinkedinIn className="p-2 bg-gray-200 rounded-full w-8 h-8" />
           </div>
         </div>
       </div>
 
-      {/* Bottom Section */}
-      <div className="mt-8 text-center text-gray-500 text-sm border-t border-gray-700 pt-4">
-        © 2024 Skillbridge. All rights reserved.
+      <div className="text-center mt-6 text-gray-600 text-sm">
+        © 2023 Skillbridge. All rights reserved.
       </div>
     </footer>
   );

@@ -41,35 +41,37 @@ const BenefitsSection = () => {
   ];
 
   return (
-    <section className="py-12 bg-gradient-to-b from-gray-50 to-gray-200">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="py-16 bg-gray-100">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-10">
-          <h2 className="text-4xl font-extrabold text-gray-800">Benefits</h2>
-          <p className="mt-4 text-gray-700">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-gray-900 tracking-tight">
+            Benefits
+          </h2>
+          <p className="mt-3 text-gray-600 text-lg max-w-2xl mx-auto">
             Discover how our platform enhances your learning experience with
             flexibility and innovation.
           </p>
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {benefits.map((benefit) => (
             <div
               key={benefit.id}
-              className="relative bg-white shadow-md rounded-lg p-6 border border-gray-200 hover:shadow-lg hover:scale-105 transform transition-all duration-300"
+              className="relative bg-white shadow-lg rounded-xl p-6 border border-gray-200 hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300"
             >
-              {/* Card Number */}
-              <div className="absolute top-4 right-4 text-5xl font-bold text-orange-100">
+              {/* Number in Black */}
+              <div className="absolute top-3 right-4 text-5xl font-extrabold text-black opacity-20">
                 {benefit.id}
               </div>
 
               {/* Card Content */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-800">
+                <h3 className="text-xl font-semibold text-gray-900">
                   {benefit.title}
                 </h3>
-                <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+                <p className="mt-2 text-gray-600 leading-relaxed">
                   {benefit.description}
                 </p>
               </div>

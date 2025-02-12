@@ -28,42 +28,40 @@ const Navbar = () => {
       {/* Logo */}
       <div className="flex items-center space-x-3">
         <div className="p-1 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 shadow-md">
-          <div className="bg-black text-white text-3xl p-3 rounded-full flex items-center justify-center">
+          <div className="bg-black text-white text-xl p-3 rounded-full flex items-center justify-center">
             ⚡
           </div>
         </div>
 
-        <span className="text-orange-500 font-extrabold text-2xl md:text-3xl tracking-wide">
+        <span className="text-orange-500 font-extrabold text-xl md:text-2xl tracking-wide">
           Skill-Sensei
         </span>
       </div>
 
       {/* Navigation Links */}
-      <ul className="hidden md:flex space-x-6 text-gray-600 font-medium">
-        <li>
-          <Link to="/" className="cursor-pointer hover:text-orange-500">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="/courses" className="cursor-pointer hover:text-orange-500">
-            Courses
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/who-we-are"
-            className="cursor-pointer hover:text-orange-500"
-          >
-            About Us
-          </Link>
-        </li>
-        <li>
-          <Link to="/contact" className="cursor-pointer hover:text-orange-500">
-            Contact
-          </Link>
-        </li>
-      </ul>
+      <ul className="hidden md:flex space-x-8 text-xl md:text-xl lg:text-xl text-gray-600">
+  <li>
+    <Link to="/" className="cursor-pointer hover:text-orange-500">
+      Home
+    </Link>
+  </li>
+  <li>
+    <Link to="/courses" className="cursor-pointer hover:text-orange-500">
+      Courses
+    </Link>
+  </li>
+  <li>
+    <Link to="/who-we-are" className="cursor-pointer hover:text-orange-500">
+      About Us
+    </Link>
+  </li>
+  <li>
+    <Link to="/contact" className="cursor-pointer hover:text-orange-500">
+      Contact
+    </Link>
+  </li>
+</ul>
+
 
       {/* Authentication/Profile Section */}
       <div className="flex items-center space-x-4">

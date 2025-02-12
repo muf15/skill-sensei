@@ -25,6 +25,13 @@ import Header from "./components/JobPage/Header";
 
 import JobApplyPage from "./components/JobPage/JobApplyPage";
 import RecommendedJobs from "./components/JobPage/RecommendedJobs";
+import JobHeader from "./components/Jobposting/JobHeader";
+import JobPostingForm from "./components/Jobposting/JobPostingForm";
+import VideoCallHeader from "./components/Videocall/VideoCallHeader";
+import MentorCard from "./components/Videocall/MentorCard";
+import QuoteSection from "./components/Videocall/QuoteSection";
+import BankingDashboard from "./components/Dashboard/BankingDashboard";
+import MCQ from "./components/ModuleQuiz/MCQ";
 
 const App = () => {
   return (
@@ -65,6 +72,51 @@ const App = () => {
           element={
             <div>
               <LoginScreen />
+           
+             
+            </div>
+          }
+        />
+        <Route
+          path="/Jobposting"
+          element={
+            <div>
+              <JobHeader />
+              <JobPostingForm />
+           
+             
+            </div>
+          }
+        />
+        <Route
+          path="/video-call"
+          element={
+            <div>
+              <VideoCallHeader />
+              <MentorCard />
+              <QuoteSection />
+           
+             
+            </div>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <div>
+              
+              <BankingDashboard />
+           
+             
+            </div>
+          }
+        />
+        <Route
+          path="/kani"
+          element={
+            <div>
+              
+              <MCQ />
            
              
             </div>
