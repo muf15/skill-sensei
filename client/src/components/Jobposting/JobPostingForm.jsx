@@ -85,7 +85,7 @@ const JobPostingForm = () => {
         <div className="w-1/2 relative bg-orange-100">
           <div className="absolute inset-0 flex items-center justify-center">
             <img
-              src="/api/placeholder/600/800"
+              src="./src/assets/Images/Illustration (1).png"
               alt="Job posting illustration"
               className="object-cover w-full h-full"
             />

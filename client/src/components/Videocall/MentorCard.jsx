@@ -1,6 +1,10 @@
 import React from 'react';
 
 const MentorCard = () => {
+  const handleScheduleSession = () => {
+    window.location.href = "https://kani21.daily.co/TzK7Hs9DL3CdAS80lgq3"; // Replace with your actual Daily.co room link
+  };
+
   return (
     <div className="flex min-h-screen w-full items-center justify-center bg-gray-100 p-6">
       <div className="flex flex-col md:flex-row bg-white rounded-2xl shadow-xl max-w-5xl w-full overflow-hidden">
@@ -41,7 +45,10 @@ const MentorCard = () => {
               </div>
             </div>
 
-            <button className="w-full mt-8 bg-orange-500 text-white py-4 rounded-xl font-semibold text-lg hover:bg-orange-600 transition-colors duration-200 shadow-lg hover:shadow-xl">
+            <button 
+              className="w-full mt-8 bg-orange-500 text-white py-4 rounded-xl font-semibold text-lg hover:bg-orange-600 transition-colors duration-200 shadow-lg hover:shadow-xl"
+              onClick={handleScheduleSession}
+            >
               Schedule a Session
             </button>
           </div>
@@ -51,15 +58,13 @@ const MentorCard = () => {
         <div className="hidden md:block w-1/3 relative bg-orange-100">
           <div className="absolute inset-0">
             <img
-              src="/api/placeholder/400/800"
+              src="./src/assets/Images/Illustration.png"
               alt="Teaching Mathematics"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-orange-500/50 to-transparent"></div>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-            
-          </div>
+          <div className="absolute bottom-0 left-0 right-0 p-6 text-white"></div>
         </div>
       </div>
     </div>
