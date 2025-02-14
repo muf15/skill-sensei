@@ -1,4 +1,5 @@
 import React from 'react';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const MentorCard = () => {
   const handleScheduleSession = () => {
@@ -51,6 +52,8 @@ const MentorCard = () => {
             >
               Schedule a Session
             </button>
+            <ConnectButton />
+
           </div>
         </div>
 

@@ -1,5 +1,22 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  getDefaultConfig,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import { WagmiProvider } from 'wagmi';
+import {
+  mainnet,
+  polygon,
+  optimism,
+  arbitrum,
+  base,
+} from 'wagmi/chains';
+import {
+  QueryClientProvider,
+  QueryClient,
+} from "@tanstack/react-query";
 
 // Import Components
 import Navbar from "./components/Navbar/Navbar";
@@ -35,9 +52,22 @@ import MCQ from "./components/ModuleQuiz/MCQ";
 import ContactHeader from "./components/Contact/ContactHeader";
 import Chat from "./components/Ai/Chat";
 import TeamSection from "./components/Contact/TeamSection";
+import ResumeBuilder from "./components/Resume/Resumebuilder";
+
+const config = getDefaultConfig({
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
+  chains: [mainnet, polygon, optimism, arbitrum, base],
+  ssr: true, // If your dApp uses server side rendering (SSR)
+});
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>
     <Router>
       {/* Navbar always visible */}
       <Navbar />
@@ -214,10 +244,10 @@ const App = () => {
 
         {/* New Page 2 */}
         <Route
-          path="/new-page-2"
+          path="/resume"
           element={
             <div>
-              <h1>New Page 2</h1>
+              <ResumeBuilder/>
               <p>This is the content of the second new page.</p>
             </div>
           }
@@ -227,6 +257,9 @@ const App = () => {
       {/* Footer always visible */}
       <Footer />
     </Router>
+    </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 };
 
