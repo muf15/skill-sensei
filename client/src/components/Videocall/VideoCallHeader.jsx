@@ -1,28 +1,41 @@
-import React from 'react';
+import React from "react";
+import Navbar from "../Navbar/Navbar";
 
-const VideoCallHeader = () => {
+const Header = () => {
   return (
-    <div
-      className="relative h-screen w-full bg-cover bg-center text-white"
-      style={{
-        backgroundImage: `url('https://source.unsplash.com/1600x900/?library,books')`,
-      }}
-    >
-      {/* Overlay for dark effect */}
-      <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+    <div className=" w-full min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute top-0 left-0 min-w-full min-h-full w-full h-full object-cover opacity-100"
+      >
+        <source src="https://cdn.pixabay.com/video/2020/02/25/32826-394513840_large.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-      {/* Text content */}
-      <div className="relative flex h-full items-center justify-center px-4 text-center">
-        <p className="text-lg md:text-2xl lg:text-3xl max-w-4xl leading-relaxed">
-          "We are a dedicated team committed to empowering learners worldwide with
-          cutting-edge resources in design, technology, and development. Our
-          mission is to provide high-quality, accessible, and innovative
-          learning experiences that equip individuals with the skills they need
-          to excel in today’s fast-evolving digital world."
+      {/* Overlay */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
+
+      {/* Navbar */}
+      <div className="absolute top-0 w-full z-10">
+        <Navbar />
+      </div>
+
+      {/* Hero Content */}
+      <div className="relative z-10 flex flex-col justify-center items-center px-4 md:px-8 lg:px-16 mt-32">
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6">
+          ⚡ <span className="text-orange-500"> Great</span>   mentors, greater insights!
+        </h1>
+        <p className="text-xl md:text-2xl lg:text-3xl text-gray-200 mb-10 max-w-3xl">
+        "A mentor’s wisdom can illuminate your path in ways no book ever could. Every call is a bridge to new ideas, fresh perspectives, and game-changing insights. Stay ready—your next breakthrough is just a conversation away!"
         </p>
+        
       </div>
     </div>
   );
 };
 
-export default VideoCallHeader;
+export default Header;

@@ -22,7 +22,7 @@ import AiHeader from "./components/Ai/AIHeader";
 import ContactUs from "./components/Contact/Contactus";
 import Course from "./components/CoursePage/Course";
 import Header from "./components/JobPage/Header";
-
+import CourseHeader from "./components/CoursePage/CourseHeader";
 import JobApplyPage from "./components/JobPage/JobApplyPage";
 import RecommendedJobs from "./components/JobPage/RecommendedJobs";
 import JobHeader from "./components/Jobposting/JobHeader";
@@ -32,6 +32,9 @@ import MentorCard from "./components/Videocall/MentorCard";
 import QuoteSection from "./components/Videocall/QuoteSection";
 import BankingDashboard from "./components/Dashboard/BankingDashboard";
 import MCQ from "./components/ModuleQuiz/MCQ";
+import ContactHeader from "./components/Contact/ContactHeader";
+import Chat from "./components/Ai/Chat";
+import TeamSection from "./components/Contact/TeamSection";
 
 const App = () => {
   return (
@@ -47,10 +50,13 @@ const App = () => {
           element={
             <div>
               <HeroSection />
+              <QuoteSection/>
               <VideoWithPlayButton />
               <BenefitsSection />
               <CourseSection />
               <Testimonials />
+              <QuoteSection/>
+            
               <FAQ />
             </div>
           }
@@ -61,7 +67,9 @@ const App = () => {
             path="/Courses"
             element={
               <div>
+                <CourseHeader/>
                 <Course /> 
+                <QuoteSection/>
               </div>
             }
           />
@@ -139,6 +147,7 @@ const App = () => {
           element={
             <div>
               <WhoWeAre />
+              <QuoteSection/>
               <Achievements />
               <Goals />
             </div>
@@ -175,7 +184,10 @@ const App = () => {
           path="/contact"
           element={
             <div>
+              <ContactHeader/>
+              <TeamSection/>
               <ContactUs/>
+            
             </div>
           }
         />
@@ -195,6 +207,7 @@ const App = () => {
           element={
             <div>
               <AiHeader/>
+              <Chat/>
             </div>
           }
         />
