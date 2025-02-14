@@ -10,12 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "@heroicons/react": "^2.2.0",
     "@rainbow-me/rainbowkit": "^2.2.3",
     "@reown/walletkit": "^1.2.0",
     "@tanstack/react-query": "^5.66.0",
+    "@tensorflow-models/speech-commands": "^0.5.4",
     "@walletconnect/core": "^2.18.0",
     "@walletconnect/utils": "^2.18.0",
     "axios": "^1.7.9",
+    "buffer": "^6.0.3",
     "ethers": "^6.13.5",
     "framer-motion": "^12.0.11",
     "jspdf": "^2.5.2",

@@ -3,28 +3,39 @@ import Navbar from "../Navbar/Navbar";
 
 const Header = () => {
   return (
-    <div className="w-full min-h-screen flex flex-col bg-gray-50">
-      {/* Navbar */}
-      <Navbar />
+    <div className=" w-full min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute top-0 left-0 min-w-full min-h-full w-full h-full object-cover opacity-100"
+      >
+        <source src="https://cdn.pixabay.com/video/2016/05/12/3132-166335897_large.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-      {/* Hero Section */}
-      <div className="flex-1 flex flex-col justify-center items-center text-center px-4 md:px-8 lg:px-16 mt-20">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight mb-4">
-          ⚡ <span className="text-orange-500">Unlock</span> Your Creative
-          Potential
+      {/* Overlay */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
+
+      {/* Navbar */}
+      <div className="absolute top-0 w-full z-10">
+        <Navbar />
+      </div>
+
+      {/* Hero Content */}
+      <div className="relative z-10 flex flex-col justify-center items-center px-4 md:px-8 lg:px-16 mt-32">
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6">
+          ⚡ <span className="text-orange-500"> Get </span> in Touch
         </h1>
-        <p className="text-lg text-gray-600 mb-8">
-          with Online Design and Development Courses.
-          <br />
-          Learn from Industry Experts and Enhance Your Skills.
+        <p className="text-xl md:text-2xl lg:text-3xl text-gray-200 mb-10 max-w-3xl">
+        Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
         </p>
-        <div className="flex space-x-4 mb-10">
-          <button className="bg-orange-500 text-white px-6 py-3 rounded-md font-medium hover:bg-orange-600">
-            Explore Courses
-          </button>
-          <button className="bg-gray-200 text-gray-800 px-6 py-3 rounded-md font-medium hover:bg-gray-300">
-            View Pricing
-          </button>
+        <div className="flex space-x-6 mb-12">
+          <button className="bg-orange-500 text-white px-8 py-4 text-lg lg:text-xl rounded-md font-semibold hover:bg-orange-600 transition">
+Meet The Team           </button>
+          
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ import {
   QueryClientProvider,
   QueryClient,
 } from "@tanstack/react-query";
-
+import { useState } from "react";
 // Import Components
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
@@ -53,6 +53,8 @@ import ContactHeader from "./components/Contact/ContactHeader";
 import Chat from "./components/Ai/Chat";
 import TeamSection from "./components/Contact/TeamSection";
 import ResumeBuilder from "./components/Resume/Resumebuilder";
+import Mockinterview from "./components/Resume/Mockinterview";
+import InterviewComponent from "./components/Resume/InterviewComponent";
 
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
@@ -64,6 +66,7 @@ const config = getDefaultConfig({
 const queryClient = new QueryClient();
 
 const App = () => {
+  const [questions, setQuestions] = useState([]);
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
@@ -248,6 +251,8 @@ const App = () => {
           element={
             <div>
               <ResumeBuilder/>
+              <Mockinterview/>
+              <InterviewComponent/>
               <p>This is the content of the second new page.</p>
             </div>
           }
