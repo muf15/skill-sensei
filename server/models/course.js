@@ -13,6 +13,9 @@ const courseSchema = new mongoose.Schema(
     category: {
       type: String,
     },
+    courseThumbnail: {
+      type: String,
+    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
