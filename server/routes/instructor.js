@@ -14,10 +14,10 @@ import {
   searchCourse,
   togglePublishCourse,
 } from "../controllers/instructorController.js";
-import upload from "../utils/multer.js";
+import {uploadCourseThumbnail} from "../utils/multer.js";
 const router = express.Router();
 
-router.route("/").post(authMiddleware, upload.single("file"), createCourse);
+router.route("/").post(authMiddleware, uploadCourseThumbnail, createCourse);
 // router.route("/").post(isAuthenticated,createCourse);
 // router.route("/search").get(isAuthenticated, searchCourse);
 // router.route("/published-courses").get( getPublishedCourse);
