@@ -105,23 +105,23 @@ export const loginRedirectByRole = (role) => {
 };
 
 // **Register Skills**
-export const registerSkills = async (req, res) => {
-  const { userId, skills } = req.body;
+// export const registerSkills = async (req, res) => {
+//   const { userId, skills } = req.body;
 
-  if (!skills || skills.length === 0) {
-    return res.status(400).json({ message: "Skills are required!" });
-  }
+//   if (!skills || skills.length === 0) {
+//     return res.status(400).json({ message: "Skills are required!" });
+//   }
 
-  try {
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: "User not found!" });
-    }
+//   try {
+//     const user = await User.findById(userId);
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found!" });
+//     }
 
-    user.skills.push(...skills);
-    await user.save();
-    res.status(200).json({ message: "Skills updated successfully!" });
-  } catch (error) {
-    res.status(500).json({ message: "Server error!", error });
-  }
-};
+//     user.skills.push(...skills);
+//     await user.save();
+//     res.status(200).json({ message: "Skills updated successfully!" });
+//   } catch (error) {
+//     res.status(500).json({ message: "Server error!", error });
+//   }
+// };

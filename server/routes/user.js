@@ -1,5 +1,5 @@
 import express from "express";
-import { registerUser, loginUser, logoutUser, authCheck, loginRedirectByRole, registerSkills } from "../controllers/userController.js";
+import { registerUser, loginUser, logoutUser, authCheck, loginRedirectByRole} from "../controllers/userController.js";
 
 const router = express.Router();
 
@@ -25,6 +25,6 @@ router.post("/login/instructor", loginRedirectByRole("instructor"), (req, res) =
 });*/
 
 // **Register Skills**
-router.post("/register/skill", registerSkills);
+// router.post("/register/skill", registerSkills);
 
 export default router;
