@@ -27,12 +27,6 @@ const courseSchema = new mongoose.Schema(
         ref: "Lecture",
       },
     ],
-    quiz: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Lecture",
-      },
-    ],
     difficulty: {
       type: String,
       enum: ["beginner", "intermediate", "advanced"],
