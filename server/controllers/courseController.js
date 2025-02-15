@@ -11,53 +11,38 @@ export const getAllCourses = async (req, res) => {
 };
 
 // Fetch a specific course by ID
+export const getModuleDetails = async (req, res) => {
+  try {
+    const { courseId, moduleId } = req.params;
+
+    const course = await Course.findById(courseId);
+    if (!course) return res.status(404).json({ message: "Course not found!" });
+
+    const module = course.modules.id(moduleId);
+    if (!module) return res.status(404).json({ message: "Module not found!" });
+
+    res.status(200).json({
+      moduleTitle: module.moduleTitle,
+      lecture: module.lecture, // ✅ Includes video URL
+      quiz: module.quiz // ✅ Includes associated quiz
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch module details", error });
+  }
+};
 export const getCourseById = async (req, res) => {
-  const { courseId: _id } = req.params;
-
   try {
-    const course = await Course.findById(_id);
-    if (!course) return res.status(404).json({ message: "Course not found!" });
+    const { courseId } = req.params;
+    const course = await Course.findById(courseId);
 
-    res.status(200).json(course);
+    if (!course) {
+      return res.status(404).json({ message: "Course not found!" });
+    }
+
+    res.status(200).json({ course });
   } catch (error) {
-    res.status(500).json({ message: "Server error!", error });
-  }
-};
-
-// Fetch a specific lecture inside a course
-export const getLectureById = async (req, res) => {
-  const { courseId: _id, lectureId } = req.params;
-
-  try {
-    const course = await Course.findById(_id);
-    if (!course) return res.status(404).json({ message: "Course not found!" });
-
-    const lecture = course.lectures.find((lec) => lec._id.toString() === lectureId);
-    if (!lecture) return res.status(404).json({ message: "Lecture not found!" });
-
-    res.status(200).json(lecture);
-  } catch (error) {
-    res.status(500).json({ message: "Server error!", error });
-  }
-};
-
-// Fetch quiz for a specific lecture
-export const getLectureQuiz = async (req, res) => {
-  const { courseId: _id, lectureId, quizId } = req.params;
-
-  try {
-    const course = await Course.findById(_id);
-    if (!course) return res.status(404).json({ message: "Course not found!" });
-
-    const lecture = course.lectures.find((lec) => lec._id.toString() === lectureId);
-    if (!lecture) return res.status(404).json({ message: "Lecture not found!" });
-
-    const quiz = lecture.quizzes.find((q) => q._id.toString() === quizId);
-    if (!quiz) return res.status(404).json({ message: "Quiz not found!" });
-
-    res.status(200).json(quiz);
-  } catch (error) {
-    res.status(500).json({ message: "Server error!", error });
+    res.status(500).json({ message: "Failed to get course by ID", error: error.message });
   }
 };
 
