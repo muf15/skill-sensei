@@ -12,6 +12,7 @@
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
     "@heroicons/react": "^2.2.0",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
     "@rainbow-me/rainbowkit": "^2.2.3",
     "@reown/walletkit": "^1.2.0",
     "@tanstack/react-query": "^5.66.0",
@@ -20,7 +21,7 @@
     "@walletconnect/utils": "^2.18.0",
     "axios": "^1.7.9",
     "buffer": "^6.0.3",
-    "ethers": "^6.13.5",
+    "ethers": "^5.0.0",
     "framer-motion": "^12.0.11",
     "jspdf": "^2.5.2",
     "leaflet": "^1.9.4",
@@ -46,6 +47,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.12.0",
+    "hardhat": "^2.22.18",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "vite": "^6.0.1"

@@ -55,6 +55,11 @@ import TeamSection from "./components/Contact/TeamSection";
 import ResumeBuilder from "./components/Resume/Resumebuilder";
 import Mockinterview from "./components/Resume/Mockinterview";
 import InterviewComponent from "./components/Resume/InterviewComponent";
+import LessonList from "./components/PreviewPage.jsx/LessonsList";
+import Lessonheader from "./components/PreviewPage.jsx/Lessonheader";
+import Mainheader from "./components/PreviewPage.jsx/Mainheader";
+import Publish from "./components/CoursePublish/Publish";
+import Resumeheader from "./components/Resume/ResumeHeader";
 
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
@@ -103,6 +108,24 @@ const App = () => {
                 <CourseHeader/>
                 <Course /> 
                 <QuoteSection/>
+              </div>
+            }
+          />
+         <Route
+            path="/publish"
+            element={
+              <div>
+                <Publish/>
+              </div>
+            }
+          />
+         <Route
+            path="/lessonlist"
+            element={
+              <div>
+                <Mainheader/>
+                <Lessonheader/>
+                <LessonList/>
               </div>
             }
           />
@@ -250,6 +273,7 @@ const App = () => {
           path="/resume"
           element={
             <div>
+              <Resumeheader/>
               <ResumeBuilder/>
               <Mockinterview/>
               <InterviewComponent/>
