@@ -64,6 +64,8 @@ import Quizdesign from "./components/QUizdesining/Quizdesign";
 import FeedbackForm from "./components/Feedback/Feedbackform";
 import { AuthProvider } from "../src/AuthContext";
 
+import PaymentSuccess from "./components/payment/UpiPaymentScreen";
+import UpiPaymentScreen from "./components/payment/UpiPaymentScreen";
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
   projectId: 'YOUR_PROJECT_ID',
@@ -72,10 +74,10 @@ const config = getDefaultConfig({
 });
 
 const queryClient = new QueryClient();
-
 const App = () => {
   const [questions, setQuestions] = useState([]);
   return (
+   
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
@@ -120,6 +122,8 @@ const App = () => {
             element={
               <div>
                 <Publish/>
+                <UpiPaymentScreen/>
+              
               </div>
             }
           />
@@ -133,6 +137,7 @@ const App = () => {
               </div>
             }
           />
+           <Route path="/payment-success" element={<PaymentSuccess />} />
 
         {/* Login/Register Page */}
         <Route
@@ -296,6 +301,7 @@ const App = () => {
     </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
+   
   );
 };
 
