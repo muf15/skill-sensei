@@ -3,32 +3,55 @@ import { Course } from "../models/course.js";
 import { Lecture } from "../models/lecture.js";
 import {deleteMediaFromCloudinary, deleteVideoFromCloudinary, uploadMedia} from "../utils/cloudinary.js";
 
-export const createCourse = async (req,res) => {
+export const createCourse = async (req, res) => {
     try {
-        const {courseTitle, category} = req.body;
-        if(!courseTitle || !category) {
+        const { courseTitle, description, category, difficulty, price } = req.body;
+        
+        // Validate required fields
+        if (!courseTitle || !description || !category || !difficulty || price == null) {
             return res.status(400).json({
-                message:"Course title and category is required."
-            })
+                message: "All required fields (courseTitle, description, category, difficulty, price) must be provided."
+            });
         }
 
+        // Validate difficulty level
+        if (!["beginner", "intermediate", "advanced"].includes(difficulty)) {
+            return res.status(400).json({
+                message: "Invalid difficulty level. Choose from 'beginner', 'intermediate', or 'advanced'."
+            });
+        }
+
+        let courseThumbnail = "default-thumbnail-url.jpg"; // Set a default thumbnail
+        if (req.file) {
+            const uploadResult = await uploadMedia(req.file.path);
+            courseThumbnail = uploadResult.secure_url;
+        }
+
+        // Create the course
         const course = await Course.create({
             courseTitle,
+            description,
             category,
-            creator:req.id
+            difficulty,
+            price,
+            createdBy: req._id,
+            courseThumbnail
         });
 
         return res.status(201).json({
             course,
-            message:"Course created."
-        })
+            message: "Course created successfully."
+        });
+
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return res.status(500).json({
-            message:"Failed to create course"
-        })
+            message: "Failed to create course",
+            error: error.message
+        });
     }
-}
+};
+
 
 export const searchCourse = async (req,res) => {
     try {
