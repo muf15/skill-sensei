@@ -1,9 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
+  const handleExploreCourses = () => {
+    navigate("/courses");
+  };
+
   return (
-    <div className=" w-full min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
+    <div className="w-full min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
       {/* Background Video */}
       <video
         autoPlay
@@ -35,7 +42,10 @@ const HeroSection = () => {
           Learn from Industry Experts and Enhance Your Skills.
         </p>
         <div className="flex space-x-6 mb-12">
-          <button className="bg-orange-500 text-white px-8 py-4 text-lg lg:text-xl rounded-md font-semibold hover:bg-orange-600 transition">
+          <button
+            className="bg-orange-500 text-white px-8 py-4 text-lg lg:text-xl rounded-md font-semibold hover:bg-orange-600 transition"
+            onClick={handleExploreCourses}
+          >
             Explore Courses
           </button>
           <button className="bg-gray-200 text-gray-800 px-8 py-4 text-lg lg:text-xl rounded-md font-semibold hover:bg-gray-300 transition">

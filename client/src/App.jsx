@@ -60,6 +60,7 @@ import Lessonheader from "./components/PreviewPage.jsx/Lessonheader";
 import Mainheader from "./components/PreviewPage.jsx/Mainheader";
 import Publish from "./components/CoursePublish/Publish";
 import Resumeheader from "./components/Resume/ResumeHeader";
+import Quizdesign from "./components/QUizdesining/Quizdesign";
 
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
@@ -142,6 +143,16 @@ const App = () => {
           }
         />
         <Route
+          path="/login"
+          element={
+            <div>
+              <LoginScreen />
+           
+             
+            </div>
+          }
+        />
+        <Route
           path="/Jobposting"
           element={
             <div>
@@ -175,17 +186,7 @@ const App = () => {
             </div>
           }
         />
-        <Route
-          path="/kani"
-          element={
-            <div>
-              
-              <MCQ />
-           
-             
-            </div>
-          }
-        />
+        
         <Route
           path="/signup"
           element={
@@ -211,15 +212,7 @@ const App = () => {
         />
 
         {/* Screen 3 Page */}
-        <Route
-          path="/screen3"
-          element={
-            <div>
-              <Video />
-              <ChillGuy />
-            </div>
-          }
-        />
+        
 
         {/* Quiz Page */}
         <Route
@@ -255,6 +248,15 @@ const App = () => {
               
               <JobApplyPage/>
               <RecommendedJobs/>
+            </div>
+          }
+        />
+        <Route
+          path="/quiz-design"
+          element={
+            <div>
+            <Quizdesign/>
+            
             </div>
           }
         />

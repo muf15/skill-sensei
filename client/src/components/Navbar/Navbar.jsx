@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
 
 const Navbar = () => {
   const { isLoggedIn, userId, logout, checkAuthStatus } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     checkAuthStatus();
@@ -19,9 +20,13 @@ const Navbar = () => {
     }
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(prev => !prev);
+  };
+
   return (
     <nav className="fixed top-0 left-0 w-full backdrop-blur-md bg-black/30 shadow-lg border-b border-gray-800 flex justify-between items-center py-4 px-6 md:px-16 z-50">
-      {/* Logo */}
+      {/* Logo and Brand Name (Left) */}
       <div className="flex items-center space-x-3">
         <div className="p-1 rounded-full bg-gradient-to-r from-orange-400 to-red-600 shadow-xl animate-pulse">
           <div className="bg-black text-white text-xl p-3 rounded-full flex items-center justify-center">
@@ -33,31 +38,75 @@ const Navbar = () => {
         </span>
       </div>
 
-      {/* Navigation Links */}
+      {/* Navigation Links (Desktop) */}
       <ul className="hidden md:flex space-x-8 text-lg text-gray-300">
         <li>
-          <Link to="/" className="cursor-pointer hover:text-orange-400 transition-all duration-300">
+          <Link
+            to="/"
+            className="cursor-pointer hover:text-orange-400 transition-all duration-300"
+          >
             Home
           </Link>
         </li>
         <li>
-          <Link to="/courses" className="cursor-pointer hover:text-orange-400 transition-all duration-300">
+          <Link
+            to="/courses"
+            className="cursor-pointer hover:text-orange-400 transition-all duration-300"
+          >
             Courses
           </Link>
         </li>
         <li>
-          <Link to="/who-we-are" className="cursor-pointer hover:text-orange-400 transition-all duration-300">
+          <Link
+            to="/who-we-are"
+            className="cursor-pointer hover:text-orange-400 transition-all duration-300"
+          >
             About Us
           </Link>
         </li>
         <li>
-          <Link to="/contact" className="cursor-pointer hover:text-orange-400 transition-all duration-300">
+          <Link
+            to="/contact"
+            className="cursor-pointer hover:text-orange-400 transition-all duration-300"
+          >
             Contact
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/ai"
+            className="cursor-pointer hover:text-orange-400 transition-all duration-300"
+          >
+            Sensie Bot
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/job"
+            className="cursor-pointer hover:text-orange-400 transition-all duration-300"
+          >
+            Jobs
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/resume"
+            className="cursor-pointer hover:text-orange-400 transition-all duration-300"
+          >
+            Resume
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/dashboard"
+            className="cursor-pointer hover:text-orange-400 transition-all duration-300"
+          >
+            My Rewards
           </Link>
         </li>
       </ul>
 
-      {/* Authentication/Profile Section */}
+      {/* Authentication/Profile Section and Mobile Menu Toggle (Right) */}
       <div className="flex items-center space-x-4">
         {isLoggedIn ? (
           <div className="flex items-center space-x-4">
@@ -87,7 +136,124 @@ const Navbar = () => {
             </button>
           </>
         )}
+
+        {/* Hamburger Icon for Mobile (visible only on small screens) */}
+        <div className="md:hidden">
+          <button onClick={toggleMobileMenu} className="text-gray-300 focus:outline-none">
+            {isMobileMenuOpen ? (
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Navigation Menu (Dropdown) */}
+      {isMobileMenuOpen && (
+        <div className="absolute top-full left-0 w-full bg-black/90 border-t border-gray-800 md:hidden">
+          <ul className="flex flex-col space-y-4 p-4 text-lg text-gray-300">
+            <li>
+              <Link
+                to="/"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block hover:text-orange-400 transition-all duration-300"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/courses"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block hover:text-orange-400 transition-all duration-300"
+              >
+                Courses
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/who-we-are"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block hover:text-orange-400 transition-all duration-300"
+              >
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contact"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block hover:text-orange-400 transition-all duration-300"
+              >
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/ai"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block hover:text-orange-400 transition-all duration-300"
+              >
+                Sensie Bot
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/jobs"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block hover:text-orange-400 transition-all duration-300"
+              >
+                Jobs
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/resume"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block hover:text-orange-400 transition-all duration-300"
+              >
+                Resume
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/dashboard"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block hover:text-orange-400 transition-all duration-300"
+              >
+                My Rewards
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </nav>
   );
 };
