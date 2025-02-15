@@ -3,12 +3,10 @@ import multer from "multer";
 const storage = multer.diskStorage({});
 const upload = multer({ storage });
 
-export const uploadCourseThumbnail = (req, res, next) => {
-    upload.single("courseThumbnail")(req, res, (err) => {
-        if (err) {
-            return res.status(400).json({ message: "File upload failed", error: err.message });
-        }
-        next();
-    });
-};
+// Middleware for multiple file uploads
+const uploadFiles = upload.fields([
+    { name: "courseThumbnail", maxCount: 1 },
+    { name: "videoUrl", maxCount: 1 }
+]);
 
+export { uploadFiles };
