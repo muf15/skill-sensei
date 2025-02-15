@@ -66,6 +66,7 @@ import { AuthProvider } from "../src/AuthContext";
 
 import PaymentSuccess from "./components/payment/UpiPaymentScreen";
 import UpiPaymentScreen from "./components/payment/UpiPaymentScreen";
+import GeminiAssistant from "./components/Ai/GeminiAssistant";
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
   projectId: 'YOUR_PROJECT_ID',
@@ -123,6 +124,7 @@ const App = () => {
               <div>
                 <Publish/>
                 <UpiPaymentScreen/>
+              
               
               </div>
             }
@@ -274,7 +276,8 @@ const App = () => {
           element={
             <div>
               <AiHeader/>
-              <Chat/>
+              
+              <GeminiAssistant/>
             </div>
           }
         />
