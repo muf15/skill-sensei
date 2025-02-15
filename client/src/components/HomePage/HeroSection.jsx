@@ -12,7 +12,7 @@ const HeroSection = () => {
         playsInline
         className="absolute top-0 left-0 min-w-full min-h-full w-full h-full object-cover opacity-100"
       >
-        <source src="https://cdn.pixabay.com/video/2022/06/22/121752-724719626_large.mp4" type="video/mp4" />
+        <source src="../src/assets/Videos/homecom.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 

@@ -69,7 +69,7 @@ const ResumeBuilder = () => {
   };
 
   return (
-    <div className="p-6 max-w-lg mx-auto bg-white rounded-lg shadow-md">
+    <div className="p-6 mt-24 max-w-lg mx-auto bg-white rounded-lg shadow-md">
       <h2 className="text-xl font-bold mb-4 text-center">AI-Powered Resume Builder</h2>
       <input className="w-full p-2 border rounded mb-2" name="name" placeholder="Full Name" onChange={handleChange} />
       <input className="w-full p-2 border rounded mb-2" name="email" placeholder="Email" onChange={handleChange} />
