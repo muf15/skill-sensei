@@ -15,6 +15,7 @@ const courseSchema = new mongoose.Schema(
     },
     courseThumbnail: {
       type: String,
+      default: "https://img.freepik.com/free-vector/e-learning-icons-flat_1284-3950.jpg"
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
@@ -27,6 +28,15 @@ const courseSchema = new mongoose.Schema(
         ref: "Lecture",
       },
     ],
+    moduleQuiz:{
+      questions: [
+        {
+          questionText: { type: String, required: true },
+          options: [{ type: String, required: true }],
+          correctAnswerIndex: { type: Number, required: true }, // Index of the correct option
+        },
+      ],
+    },
     difficulty: {
       type: String,
       enum: ["beginner", "intermediate", "advanced"],
