@@ -16,13 +16,13 @@ router.post("/logout", logoutUser);
 router.get("/authcheck", authCheck);
 
 // **Role-based Redirects**
-router.post("/login/student", loginRedirectByRole("student"), (req, res) => {
+/*router.post("/login/student", loginRedirectByRole("student"), (req, res) => {
   res.redirect("/student-dashboard");
 });
 
 router.post("/login/instructor", loginRedirectByRole("instructor"), (req, res) => {
   res.redirect("/instructor-dashboard");
-});
+});*/
 
 // **Register Skills**
 router.post("/register/skill", registerSkills);
