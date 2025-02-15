@@ -61,6 +61,8 @@ import Mainheader from "./components/PreviewPage.jsx/Mainheader";
 import Publish from "./components/CoursePublish/Publish";
 import Resumeheader from "./components/Resume/ResumeHeader";
 import Quizdesign from "./components/QUizdesining/Quizdesign";
+import FeedbackForm from "./components/Feedback/Feedbackform";
+import { AuthProvider } from "../src/AuthContext";
 
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
@@ -77,6 +79,7 @@ const App = () => {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
+          <AuthProvider>
     <Router>
       {/* Navbar always visible */}
       <Navbar />
@@ -143,15 +146,16 @@ const App = () => {
           }
         />
         <Route
-          path="/login"
+          path="/feedback"
           element={
             <div>
-              <LoginScreen />
+              <FeedbackForm />
            
              
             </div>
           }
         />
+        
         <Route
           path="/Jobposting"
           element={
@@ -288,6 +292,7 @@ const App = () => {
       {/* Footer always visible */}
       <Footer />
     </Router>
+    </AuthProvider>
     </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

@@ -1,36 +1,59 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for routing
-import axios from "axios";
-import "../../App.css"; // Custom CSS for font import
+import { useNavigate } from "react-router-dom";
+import { api } from "../../axios.config.js";
 
 const RegisterScreen = () => {
-  const navigate = useNavigate(); // Hook for navigation
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "student",
+    skills: [],
+  });
+  const [skillInput, setSkillInput] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent page refresh
-    try {
-      const response = await axios.post(
-        "http://localhost:3015/api/v1/user/register", // Replace with your API URL
-        { name, email, password }
-      );
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-      console.log("Registration successful:", response.data);
-      setSuccess(response.data.message); // Show success message
-      setError(""); // Clear any previous errors
-      setName("");
-      setEmail("");
-      setPassword("");
+  const handleSkillChange = (e) => {
+    setSkillInput(e.target.value);
+  };
+
+  const handleSkillAdd = () => {
+    const trimmedSkill = skillInput.trim();
+    if (trimmedSkill !== "" && !formData.skills.includes(trimmedSkill)) {
+      setFormData({ ...formData, skills: [...formData.skills, trimmedSkill] });
+      setSkillInput("");
+    }
+  };
+
+  const handleSkillRemove = (skill) => {
+    setFormData({
+      ...formData,
+      skills: formData.skills.filter((s) => s !== skill),
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await api.post("/api/v1/user/register", formData);
+      setSuccess(response.data.message);
+      setError("");
+      setFormData({ name: "", email: "", password: "", role: "student", skills: [] });
+      
+      // Redirect to /course after successful registration
+      navigate("/courses");
     } catch (error) {
-      console.error("Error during registration:", error.response?.data || error.message);
       setError(
-        error.response?.data?.message || "An unexpected error occurred. Please try again."
+        error.response?.data?.message ||
+          "An unexpected error occurred. Please try again."
       );
-      setSuccess(""); // Clear any success messages
+      setSuccess("");
     }
   };
 
@@ -39,7 +62,7 @@ const RegisterScreen = () => {
       <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-4xl">
         <div className="w-full md:w-1/2">
           <img
-            src="./src/assets/Images/ai-generated-8810198_1280.webp" // Image path untouched
+            src="./src/assets/Images/ai-generated-8810198_1280.webp"
             alt="Engineers working"
             className="object-cover w-full h-48 md:h-full"
           />
@@ -49,68 +72,120 @@ const RegisterScreen = () => {
             <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 text-center mb-4 md:mb-6">
               Welcome to Skills Sensei..!
             </h2>
-            {/* Login and Register Tabs */}
-            <div className="flex justify-center mb-6 group">
-              <button
-                className="flex-1 bg-orange-500 text-white border border-orange-500 px-4 py-2 rounded-l-full group-hover:bg-white group-hover:text-orange-500 transition duration-300"
-                onClick={() => navigate("/signup")} // Navigate to /signup
-              >
-                Register
-              </button>
-              <button
-                className="flex-1 bg-white text-orange-500 border border-orange-500 px-4 py-2 rounded-r-full hover:bg-orange-500 hover:text-white transition duration-300"
-                onClick={() => navigate("/login")} // Navigate to /login
-              >
-                Login
-              </button>
-            </div>
-            {/* Display success or error messages */}
             {error && <p className="text-red-500 text-center mb-4">{error}</p>}
             {success && <p className="text-green-500 text-center mb-4">{success}</p>}
 
             <form onSubmit={handleSubmit}>
-              <div className="mb-6">
+              <div className="mb-4">
                 <label htmlFor="name" className="block text-gray-700 mb-2 text-sm">
                   Name
                 </label>
                 <input
                   id="name"
+                  name="name"
                   type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Enter your Name"
                   className="w-full px-4 py-2 border border-orange-400 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
                   required
                 />
               </div>
-              <div className="mb-6">
+              <div className="mb-4">
                 <label htmlFor="email" className="block text-gray-700 mb-2 text-sm">
                   Email Address
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="Enter your Email Address"
                   className="w-full px-4 py-2 border border-orange-400 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
                   required
                 />
               </div>
-              <div className="mb-6 relative">
+              <div className="mb-4">
                 <label htmlFor="password" className="block text-gray-700 mb-2 text-sm">
                   Password
                 </label>
                 <input
                   id="password"
+                  name="password"
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={formData.password}
+                  onChange={handleChange}
                   placeholder="Enter your Password"
                   className="w-full px-4 py-2 border border-orange-400 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
                   required
                 />
               </div>
+              <div className="mb-4">
+                <label htmlFor="role" className="block text-gray-700 mb-2 text-sm">
+                  Role
+                </label>
+                <select
+                  id="role"
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-orange-400 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
+                  required
+                >
+                  <option value="student">Student</option>
+                  <option value="instructor">Instructor</option>
+                </select>
+              </div>
+
+              {/* Skills Input Section */}
+              <div className="mb-4">
+                <label htmlFor="skills" className="block text-gray-700 mb-2 text-sm">
+                  Skills
+                </label>
+                <div className="flex">
+                  <input
+                    id="skills"
+                    type="text"
+                    value={skillInput}
+                    onChange={handleSkillChange}
+                    placeholder="Enter a skill and press Add or Enter"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleSkillAdd();
+                      }
+                    }}
+                    className="flex-1 px-4 py-2 border border-orange-400 rounded-l-full focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleSkillAdd}
+                    className="bg-orange-500 text-white px-4 py-2 rounded-r-full hover:bg-orange-600 transition duration-300 text-sm"
+                  >
+                    Add
+                  </button>
+                </div>
+                {/* Display added skills */}
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {formData.skills.map((skill, index) => (
+                    <div
+                      key={index}
+                      className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm flex items-center"
+                    >
+                      {skill}
+                      <button
+                        type="button"
+                        className="ml-2 text-orange-500 hover:text-orange-700"
+                        onClick={() => handleSkillRemove(skill)}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <button
                 type="submit"
                 className="w-full bg-orange-500 text-white py-2 rounded-full hover:bg-orange-600 transition duration-300 text-sm"

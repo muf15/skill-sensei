@@ -1,80 +1,109 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext.jsx"; // Import AuthContext
+import { api } from "../../axios.config.js"; // Adjust path if needed
 
-const LoginScreen = () => {
+const Login = () => {
   const navigate = useNavigate();
-  const { login, error } = useContext(AuthContext); // Get error from context
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent page refresh
+    e.preventDefault();
+    setIsLoading(true);
+    setErrorMessage("");
+
     try {
-      await login(email, password); // Use the login function from AuthContext
-      navigate("/"); // Redirect on successful login
+      // With the updated baseURL, this calls: http://localhost:3015/api/v1/user/login
+      const response = await api.post("/user/login", { email, password });
+      if (response.status === 200) {
+        const { role } = response.data;
+        setLoginSuccess(true);
+
+        setTimeout(() => {
+          setLoginSuccess(false);
+          if (role === "student") {
+            navigate("/dashboard");
+          } else if (role === "instructor") {
+            navigate("/publish");
+          } else {
+            navigate("/");
+          }
+        }, 3000);
+      }
     } catch (err) {
-      console.error("Login failed:", err);
+      console.error("Login error:", err);
+      setErrorMessage(
+        err.response?.data?.message || "Login failed. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-4xl">
-        <div className="w-full md:w-1/2">
-          <img
-            src="./src/assets/Images/ai-generated-8810198_1280.webp"
-            alt="Engineers working"
-            className="object-cover w-full h-48 md:h-full"
-          />
-        </div>
-        <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-8">
-          <div className="w-full">
-            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 text-center mb-4 md:mb-6">
-              Welcome to Skills Sensei..!
-            </h2>
-            {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label htmlFor="email" className="block text-gray-700 mb-1">
-                  Email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-2 border border-orange-400 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="password" className="block text-gray-700 mb-1">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  className="w-full px-4 py-2 border border-orange-400 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-orange-500 text-white py-2 rounded-full hover:bg-orange-600 transition duration-300"
-              >
-                Login
-              </button>
-            </form>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
+
+        {errorMessage && (
+          <div className="bg-red-100 text-red-600 p-2 rounded mb-4 text-center">
+            {errorMessage}
           </div>
-        </div>
+        )}
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-gray-700 mb-2">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border border-gray-300 p-2 rounded"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div className="mb-6">
+            <label htmlFor="password" className="block text-gray-700 mb-2">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full border border-gray-300 p-2 rounded"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={`w-full bg-blue-500 text-white p-2 rounded transition ${
+              isLoading ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-600"
+            }`}
+          >
+            {isLoading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        {loginSuccess && (
+          <div className="mt-4 bg-green-100 text-green-600 p-2 rounded text-center">
+            Login successful!
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default LoginScreen;
+export default Login;
