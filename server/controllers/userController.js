@@ -51,17 +51,20 @@ export const loginUser = async (req, res) => {
       expiresIn: "1d",
     });
 
-    res.status(200).json({
-      message: "Login successful",
-      token,
-      role: user.role,
-      id: user._id,
-      //redirectUrl: loginRedirectByRole(user.role), // Add redirect URL
+    // ✅ Set token in an HTTP-only cookie (automatic for future requests)
+    res.cookie("token", token, {
+      httpOnly: true, 
+      secure: process.env.NODE_ENV === "production", // Enable secure cookies in production
+      sameSite: "Strict",
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
+
+    res.status(200).json({ message: "Login successful", role: user.role });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
 
 // Logout
 export const logoutUser = (req, res) => {
