@@ -1,21 +1,30 @@
 import express from "express";
-import { register, login, logout } from "../controllers/user.js";
-import isAuthenticated from "../middleware/isAuthenticated.js"; // Import the existing middleware
+import { registerUser, loginUser, logoutUser, authCheck, loginRedirectByRole, registerSkills } from "../controllers/userController.js";
 
 const router = express.Router();
 
-// Routes
-router.route("/register").post(register);
-router.route("/login").post(login);
-router.route("/logout").post(logout);
+// **User Registration**
+router.post("/register", registerUser);
 
-// Route to check auth
-router.route("/auth/check").get(isAuthenticated, (req, res) => {
-  res.status(200).json({    
-    success: true,
-    message: "User is authenticated",
-    userId: req.id, // Use the user ID attached by the middleware
-  });
+// **User Login**
+router.post("/login", loginUser);
+
+// **User Logout**
+router.post("/logout", logoutUser);
+
+// **Authentication Check**
+router.get("/authcheck", authCheck);
+
+// **Role-based Redirects**
+router.post("/login/student", loginRedirectByRole("student"), (req, res) => {
+  res.redirect("/student-dashboard");
 });
+
+router.post("/login/instructor", loginRedirectByRole("instructor"), (req, res) => {
+  res.redirect("/instructor-dashboard");
+});
+
+// **Register Skills**
+router.post("/register/skill", registerSkills);
 
 export default router;
