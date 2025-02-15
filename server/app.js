@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import connectDB from "./db/database.js";
 import userRouter from "./routes/user.js";
+import courseRouter from "./routes/course.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -21,6 +22,8 @@ app.use(
 );
 
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/courses", courseRouter);
+
 // http://localhost:3015/api/v1/user
 
 const PORT = process.env.PORT || 3000;
