@@ -55,6 +55,12 @@ import TeamSection from "./components/Contact/TeamSection";
 import ResumeBuilder from "./components/Resume/Resumebuilder";
 import Mockinterview from "./components/Resume/Mockinterview";
 import InterviewComponent from "./components/Resume/InterviewComponent";
+import LessonList from "./components/PreviewPage.jsx/LessonsList";
+import Lessonheader from "./components/PreviewPage.jsx/Lessonheader";
+import Mainheader from "./components/PreviewPage.jsx/Mainheader";
+import Publish from "./components/CoursePublish/Publish";
+import Resumeheader from "./components/Resume/ResumeHeader";
+import Quizdesign from "./components/QUizdesining/Quizdesign";
 
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
@@ -106,8 +112,36 @@ const App = () => {
               </div>
             }
           />
+         <Route
+            path="/publish"
+            element={
+              <div>
+                <Publish/>
+              </div>
+            }
+          />
+         <Route
+            path="/lessonlist"
+            element={
+              <div>
+                <Mainheader/>
+                <Lessonheader/>
+                <LessonList/>
+              </div>
+            }
+          />
 
         {/* Login/Register Page */}
+        <Route
+          path="/login"
+          element={
+            <div>
+              <LoginScreen />
+           
+             
+            </div>
+          }
+        />
         <Route
           path="/login"
           element={
@@ -152,17 +186,7 @@ const App = () => {
             </div>
           }
         />
-        <Route
-          path="/kani"
-          element={
-            <div>
-              
-              <MCQ />
-           
-             
-            </div>
-          }
-        />
+        
         <Route
           path="/signup"
           element={
@@ -188,15 +212,7 @@ const App = () => {
         />
 
         {/* Screen 3 Page */}
-        <Route
-          path="/screen3"
-          element={
-            <div>
-              <Video />
-              <ChillGuy />
-            </div>
-          }
-        />
+        
 
         {/* Quiz Page */}
         <Route
@@ -236,6 +252,15 @@ const App = () => {
           }
         />
         <Route
+          path="/quiz-design"
+          element={
+            <div>
+            <Quizdesign/>
+            
+            </div>
+          }
+        />
+        <Route
           path="/ai"
           element={
             <div>
@@ -250,6 +275,7 @@ const App = () => {
           path="/resume"
           element={
             <div>
+              <Resumeheader/>
               <ResumeBuilder/>
               <Mockinterview/>
               <InterviewComponent/>
