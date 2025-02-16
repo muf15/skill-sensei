@@ -67,6 +67,7 @@ import { AuthProvider } from "../src/AuthContext";
 import PaymentSuccess from "./components/payment/UpiPaymentScreen";
 import UpiPaymentScreen from "./components/payment/UpiPaymentScreen";
 import GeminiAssistant from "./components/Ai/GeminiAssistant";
+import Wallet from "./components/payment/Wallet";
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
   projectId: 'YOUR_PROJECT_ID',
@@ -153,6 +154,16 @@ const App = () => {
           }
         />
         <Route
+          path="/pay"
+          element={
+            <div>
+              <Wallet />
+           
+             
+            </div>
+          }
+        />
+        <Route
           path="/feedback"
           element={
             <div>
@@ -181,6 +192,7 @@ const App = () => {
               <VideoCallHeader />
               <MentorCard />
               <QuoteSection />
+             
            
              
             </div>
@@ -276,7 +288,7 @@ const App = () => {
           element={
             <div>
               <AiHeader/>
-              
+              <Chat/>
               <GeminiAssistant/>
             </div>
           }

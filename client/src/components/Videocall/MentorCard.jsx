@@ -52,8 +52,7 @@ const MentorCard = () => {
             >
               Schedule a Session
             </button>
-            <ConnectButton />
-
+            
           </div>
         </div>
 
