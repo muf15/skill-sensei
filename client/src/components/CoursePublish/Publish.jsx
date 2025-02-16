@@ -25,6 +25,14 @@ const Publish = () => {
     },
   ]);
 
+  // New state for course quiz
+  const [showCourseQuiz, setShowCourseQuiz] = useState(false);
+  const [courseQuiz, setCourseQuiz] = useState({
+    questions: [
+      { questionText: "", options: ["", "", "", ""], correctAnswerIndex: 0 },
+    ],
+  });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCourseData({ ...courseData, [name]: value });
@@ -50,7 +58,7 @@ const Publish = () => {
     const updatedModules = [...modules];
   
     if (field.startsWith("options[")) {
-      const optionIndex = parseInt(field.match(/\d+/)[0]); // Extract option index from field
+      const optionIndex = parseInt(field.match(/\d+/)[0]);
       updatedModules[moduleIndex].quiz[questionIndex].options[optionIndex] = value;
     } else {
       updatedModules[moduleIndex].quiz[questionIndex][field] = value;
@@ -58,7 +66,20 @@ const Publish = () => {
   
     setModules(updatedModules);
   };
-  
+
+  // New handler for course quiz changes
+  const handleCourseQuizChange = (questionIndex, field, value) => {
+    const updatedQuiz = { ...courseQuiz };
+    
+    if (field.startsWith("options[")) {
+      const optionIndex = parseInt(field.match(/\d+/)[0]);
+      updatedQuiz.questions[questionIndex].options[optionIndex] = value;
+    } else {
+      updatedQuiz.questions[questionIndex][field] = value;
+    }
+    
+    setCourseQuiz(updatedQuiz);
+  };
 
   const addModule = () => {
     setModules([
@@ -83,6 +104,17 @@ const Publish = () => {
     setModules(updatedModules);
   };
 
+  // New function to add course quiz question
+  const addCourseQuizQuestion = () => {
+    setCourseQuiz({
+      ...courseQuiz,
+      questions: [
+        ...courseQuiz.questions,
+        { questionText: "", options: ["", "", "", ""], correctAnswerIndex: 0 }
+      ]
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -97,18 +129,27 @@ const Publish = () => {
       formData.append("courseThumbnail", courseData.courseThumbnail);
     }
   
-    // ✅ Send modules as a JSON string
     const formattedModules = modules.map(module => ({
       moduleTitle: module.moduleTitle,
       lecture: module.lecture ? {
-        title: module.moduleTitle, // ✅ Keep the lecture title same as module
+        title: module.moduleTitle,
       } : null,
-      quiz: module.quiz,
+      quiz: {
+        questions: module.quiz.map(question => ({
+          questionText: question.questionText,
+          options: question.options,
+          correctAnswerIndex: parseInt(question.correctAnswerIndex)
+        }))
+      }
     }));
   
     formData.append("modules", JSON.stringify(formattedModules));
+    
+    // Add course quiz to form data if it exists
+    if (showCourseQuiz && courseQuiz.questions.length > 0) {
+      formData.append("cquiz", JSON.stringify(courseQuiz));
+    }
   
-    // ✅ Add Lecture Files
     modules.forEach((module, index) => {
       if (module.videoUrl) {
         formData.append(`videoUrl`, module.videoUrl);
@@ -145,25 +186,80 @@ const Publish = () => {
         <input type="text" placeholder="Price" name="price" value={courseData.price} onChange={handleInputChange} className="w-full border p-2 rounded mb-4" required />
         <input type="file" onChange={handleFileUpload} className="w-full border p-2 rounded mb-4" required />
 
+        {/* Course Quiz Section */}
+        <div className="mb-4">
+          <button
+            type="button"
+            onClick={() => setShowCourseQuiz(!showCourseQuiz)}
+            className="bg-purple-500 text-white p-2 rounded mb-4"
+          >
+            {showCourseQuiz ? 'Hide Course Quiz' : 'Add Course Quiz'}
+          </button>
+
+          {showCourseQuiz && (
+            <div className="border p-4 rounded mb-4 bg-purple-50">
+              <h3 className="text-lg font-bold mb-4">Course Final Quiz</h3>
+              {courseQuiz.questions.map((question, qIndex) => (
+                <div key={qIndex} className="mb-4">
+                  <input
+                    type="text"
+                    placeholder="Question"
+                    value={question.questionText}
+                    onChange={(e) => handleCourseQuizChange(qIndex, "questionText", e.target.value)}
+                    className="w-full border p-2 rounded mb-2"
+                  />
+                  {question.options.map((option, oIndex) => (
+                    <input
+                      key={oIndex}
+                      type="text"
+                      placeholder={`Option ${oIndex + 1}`}
+                      value={option}
+                      onChange={(e) => handleCourseQuizChange(qIndex, `options[${oIndex}]`, e.target.value)}
+                      className="w-full border p-2 rounded mb-2"
+                    />
+                  ))}
+                  <select
+                    value={question.correctAnswerIndex}
+                    onChange={(e) => handleCourseQuizChange(qIndex, "correctAnswerIndex", e.target.value)}
+                    className="w-full border p-2 rounded mb-2"
+                  >
+                    {question.options.map((_, idx) => (
+                      <option key={idx} value={idx}>{`Option ${idx + 1}`}</option>
+                    ))}
+                  </select>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={addCourseQuizQuestion}
+                className="bg-purple-500 text-white p-2 rounded"
+              >
+                Add Quiz Question
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Existing Modules Section */}
         {modules.map((module, moduleIndex) => (
           <div key={moduleIndex} className="border p-4 rounded mb-4 bg-gray-100">
             <input type="text" placeholder="Module Title" value={module.moduleTitle} onChange={(e) => handleModuleChange(moduleIndex, "moduleTitle", e.target.value)} className="w-full border p-2 rounded mb-4" />
             <input type="file" onChange={(e) => handleLectureUpload(moduleIndex, e.target.files[0])} className="w-full border p-2 rounded mb-4" />
 
-            <h3 className="text-lg font-bold">Quiz</h3>
+            <h3 className="text-lg font-bold">Module Quiz</h3>
             {module.quiz.map((question, qIndex) => (
               <div key={qIndex} className="mb-4">
                 <input type="text" placeholder="Question" value={question.questionText} onChange={(e) => handleQuizChange(moduleIndex, qIndex, "questionText", e.target.value)} className="w-full border p-2 rounded mb-2" />
                 {question.options.map((option, oIndex) => (
-  <input
-    key={oIndex}
-    type="text"
-    placeholder={`Option ${oIndex + 1}`}
-    value={option} 
-    onChange={(e) => handleQuizChange(moduleIndex, qIndex, `options[${oIndex}]`, e.target.value)}
-    className="w-full border p-2 rounded mb-2"
-  />
-))}
+                  <input
+                    key={oIndex}
+                    type="text"
+                    placeholder={`Option ${oIndex + 1}`}
+                    value={option} 
+                    onChange={(e) => handleQuizChange(moduleIndex, qIndex, `options[${oIndex}]`, e.target.value)}
+                    className="w-full border p-2 rounded mb-2"
+                  />
+                ))}
                 <select onChange={(e) => handleQuizChange(moduleIndex, qIndex, "correctAnswerIndex", e.target.value)} className="w-full border p-2 rounded mb-2">
                   {question.options.map((_, idx) => (
                     <option key={idx} value={idx}>{`Option ${idx + 1}`}</option>
