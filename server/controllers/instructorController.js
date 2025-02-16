@@ -38,10 +38,26 @@ console.log("Incoming Modules:", modules);
       console.error("Error parsing modules: ", error);
       return res.status(400).json({ message: "Invalid modules format" });
     }
+    if (req.files && req.files.videoUrl) {
+      for (let i = 0; i < req.files.videoUrl.length; i++) {
+        const file = req.files.videoUrl[i];
+
+        // ✅ Upload video to Cloudinary
+        const uploadResult = await uploadMedia(file.path, "video"); // Make sure `uploadMedia` supports video uploads
+
+        if (parsedModules[i]) {
+          parsedModules[i].lecture = {
+            title: parsedModules[i].moduleTitle, // Assign title if needed
+            videoUrl: uploadResult.secure_url, // ✅ Save Cloudinary URL
+            publicId: uploadResult.public_id // ✅ Save Public ID
+          };
+        }
+      }
+    }
 
     // ✅ Ensure uploaded videos are correctly mapped
-    if (req.files && req.files.lectureVideos) {
-      req.files.lectureVideos.forEach((file, index) => {
+  /*  if (req.files && req.files.videoUrl) {
+      req.files.videoUrl.forEach((file, index) => {
         if (parsedModules[index]) {
           parsedModules[index].lecture = {
             videoUrl: `/uploads/${file.filename}`,
@@ -49,7 +65,7 @@ console.log("Incoming Modules:", modules);
           };
         }
       });
-    }
+    }*/
 
     const course = await Course.create({
       courseTitle,
