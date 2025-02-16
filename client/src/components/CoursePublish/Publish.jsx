@@ -1,27 +1,28 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { api } from "../../axios.config.js";
 
 const Publish = () => {
   const navigate = useNavigate();
+  
   const [courseData, setCourseData] = useState({
-    courseTitle: '',
-    // subcourseTitle: '',
-    description: '',
-    category: '',
-    difficulty: '',
-    price: '',
+    courseTitle: "",
+    description: "",
+    category: "",
+    difficulty: "",
+    price: "",
     courseThumbnail: null,
     isPublished: false,
-    modules: []
   });
 
   const [modules, setModules] = useState([
     {
-      name: '',
-      lectures: [],
-      quizzes: [],
-      isPreviewFree: false
-    }
+      moduleTitle: "",
+      videoUrl: null,
+      quiz: [
+        { questionText: "", options: ["", "", "", ""], correctAnswerIndex: 0 },
+      ],
+    },
   ]);
 
   const handleInputChange = (e) => {
@@ -33,273 +34,150 @@ const Publish = () => {
     setCourseData({ ...courseData, courseThumbnail: e.target.files[0] });
   };
 
-  const handleModuleChange = (index, name) => {
+  const handleModuleChange = (index, name, value) => {
     const updatedModules = [...modules];
-    updatedModules[index].name = name;
+    updatedModules[index][name] = value;
     setModules(updatedModules);
   };
 
-  const handleLectureUpload = (moduleIndex, files) => {
+  const handleLectureUpload = (index, file) => {
     const updatedModules = [...modules];
-    updatedModules[moduleIndex].lectures = [
-      ...updatedModules[moduleIndex].lectures,
-      ...files
-    ];
+    updatedModules[index].videoUrl = file;
     setModules(updatedModules);
   };
 
-  // Removed the file upload for quizzes. Instead, we'll redirect to a quiz design page.
-  const handleQuizDesign = (moduleIndex) => {
-    // Redirect to the quiz design page for the specific module
-    navigate(`/quiz-design?moduleIndex=${moduleIndex}`);
-  };
-
-  // New function to toggle "Preview Free" for each module
-  const handlePreviewToggle = (moduleIndex) => {
+  const handleQuizChange = (moduleIndex, questionIndex, field, value) => {
     const updatedModules = [...modules];
-    updatedModules[moduleIndex].isPreviewFree = !updatedModules[moduleIndex].isPreviewFree;
+  
+    if (field.startsWith("options[")) {
+      const optionIndex = parseInt(field.match(/\d+/)[0]); // Extract option index from field
+      updatedModules[moduleIndex].quiz[questionIndex].options[optionIndex] = value;
+    } else {
+      updatedModules[moduleIndex].quiz[questionIndex][field] = value;
+    }
+  
     setModules(updatedModules);
   };
+  
 
   const addModule = () => {
     setModules([
       ...modules,
-      { name: '', lectures: [], quizzes: [], isPreviewFree: false }
+      {
+        moduleTitle: "",
+        videoUrl: null,
+        quiz: [
+          { questionText: "", options: ["", "", "", ""], correctAnswerIndex: 0 },
+        ],
+      },
     ]);
   };
 
-  const toggleIsPublished = () => {
-    setCourseData({ ...courseData, isPublished: !courseData.isPublished });
+  const addQuizQuestion = (moduleIndex) => {
+    const updatedModules = [...modules];
+    updatedModules[moduleIndex].quiz.push({
+      questionText: "",
+      options: ["", "", "", ""],
+      correctAnswerIndex: 0,
+    });
+    setModules(updatedModules);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const formData = new FormData();
-    formData.append('courseTitle', courseData.courseTitle);
-    // formData.append('subcourseTitle', courseData.subcourseTitle);
-    formData.append('description', courseData.description);
-    formData.append('category', courseData.category);
-    formData.append('difficulty', courseData.difficulty);
-    formData.append('price', courseData.price);
-    formData.append('courseThumbnail', courseData.courseThumbnail);
-    formData.append('isPublished', courseData.isPublished);
-    modules.forEach((module, moduleIndex) => {
-      formData.append(`module_${moduleIndex + 1}_name`, module.name);
-      formData.append(`module_${moduleIndex + 1}_isPreviewFree`, module.isPreviewFree);
-      module.lectures.forEach((lecture, lectureIndex) => {
-        formData.append(
-          `module_${moduleIndex + 1}_lecture_${lectureIndex + 1}`,
-          lecture
-        );
-      });
-      // If quizzes have been designed and stored in module.quizzes, append them accordingly
-      module.quizzes.forEach((quiz, quizIndex) => {
-        formData.append(
-          `module_${moduleIndex + 1}_quiz_${quizIndex + 1}`,
-          quiz
-        );
-      });
+  
+    formData.append("courseTitle", courseData.courseTitle);
+    formData.append("description", courseData.description);
+    formData.append("category", courseData.category);
+    formData.append("difficulty", courseData.difficulty);
+    formData.append("price", courseData.price);
+  
+    if (courseData.courseThumbnail) {
+      formData.append("courseThumbnail", courseData.courseThumbnail);
+    }
+  
+    // ✅ Send modules as a JSON string
+    const formattedModules = modules.map(module => ({
+      moduleTitle: module.moduleTitle,
+      lecture: module.lecture ? {
+        title: module.moduleTitle, // ✅ Keep the lecture title same as module
+      } : null,
+      quiz: module.quiz,
+    }));
+  
+    formData.append("modules", JSON.stringify(formattedModules));
+  
+    // ✅ Add Lecture Files
+    modules.forEach((module, index) => {
+      if (module.videoUrl) {
+        formData.append(`videoUrl`, module.videoUrl);
+      }
     });
-
-    const response = await fetch('/api/courses', {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (response.ok) {
-      alert('Course published successfully!');
-    } else {
-      alert('Failed to publish course.');
+  
+    try {
+      const response = await api.post("/instructor", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+  
+      if (response.status === 201) {
+        alert("Course created successfully!");
+      }
+    } catch (error) {
+      console.error("Error publishing course:", error);
+      alert(error.response?.data?.message || "Failed to publish course");
     }
   };
-
+  
   return (
-    <div className="min-h-screen bg-gradient-to-b mt-24 from-orange-200 to-white p-8">
-      <h1 className="text-3xl font-bold text-orange-600 mb-6">
-        Publish Your Course
-      </h1>
-      <div className="shadow-xl rounded-2xl p-6 bg-white">
-        <div className="space-y-4">
-          <input
-            type="text"
-            placeholder="Course Title"
-            name="courseTitle"
-            value={courseData.courseTitle}
-            onChange={handleInputChange}
-            className="w-full border border-orange-500 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-          />
+    <div className="container mx-auto p-6">
+      <h2 className="text-2xl font-bold text-center mb-4">Publish Your Course</h2>
+      <form onSubmit={handleSubmit} className="bg-white p-6 shadow-lg rounded-lg">
+        <input type="text" placeholder="Course Title" name="courseTitle" value={courseData.courseTitle} onChange={handleInputChange} className="w-full border p-2 rounded mb-4" required />
+        <textarea placeholder="Course Description" name="description" value={courseData.description} onChange={handleInputChange} className="w-full border p-2 rounded mb-4" required />
+        <input type="text" placeholder="Category" name="category" value={courseData.category} onChange={handleInputChange} className="w-full border p-2 rounded mb-4" required />
+        <select name="difficulty" onChange={handleInputChange} className="w-full border p-2 rounded mb-4" required>
+          <option value="">Select Difficulty</option>
+          <option value="beginner">Beginner</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+        <input type="text" placeholder="Price" name="price" value={courseData.price} onChange={handleInputChange} className="w-full border p-2 rounded mb-4" required />
+        <input type="file" onChange={handleFileUpload} className="w-full border p-2 rounded mb-4" required />
 
-          {/* <input
-            type="text"
-            placeholder="Course SubcourseTitle"
-            name="subcourseTitle"
-            value={courseData.subcourseTitle}
-            onChange={handleInputChange}
-            className="w-full border border-orange-500 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-          /> */}
+        {modules.map((module, moduleIndex) => (
+          <div key={moduleIndex} className="border p-4 rounded mb-4 bg-gray-100">
+            <input type="text" placeholder="Module Title" value={module.moduleTitle} onChange={(e) => handleModuleChange(moduleIndex, "moduleTitle", e.target.value)} className="w-full border p-2 rounded mb-4" />
+            <input type="file" onChange={(e) => handleLectureUpload(moduleIndex, e.target.files[0])} className="w-full border p-2 rounded mb-4" />
 
-          <textarea
-            placeholder="Course Description"
-            name="description"
-            value={courseData.description}
-            onChange={handleInputChange}
-            className="w-full border border-orange-500 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-          />
-
-          <select
-            onChange={(e) =>
-              setCourseData({ ...courseData, category: e.target.value })
-            }
-            className="w-full border border-orange-500 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-          >
-            <option value="">Select a Category</option>
-            <option value="Web Development">Web Development</option>
-            <option value="Design">Design</option>
-            <option value="Data Science">Data Science</option>
-          </select>
-
-          <select
-            onChange={(e) =>
-              setCourseData({ ...courseData, difficulty: e.target.value })
-            }
-            className="w-full border border-orange-500 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-          >
-            <option value="">Select a difficulty</option>
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
-          </select>
-
-          <input
-            type="text"
-            placeholder="Price (INR)"
-            name="price"
-            value={courseData.price}
-            onChange={handleInputChange}
-            className="w-full border border-orange-500 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-          />
-
-          <div className="flex items-center space-x-4">
-            <label className="flex items-center space-x-2 cursor-pointer">
-              <svg
-                className="w-6 h-6 text-orange-500"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 16.5V5a2.5 2.5 0 012.5-2.5h13A2.5 2.5 0 0121 5v11.5m-9 0v4M8 20h8"
-                ></path>
-              </svg>
-              <span>Upload Thumbnail</span>
-              <input type="file" onChange={handleFileUpload} className="hidden" />
-            </label>
-            {courseData.courseThumbnail && (
-              <span>{courseData.courseThumbnail.name}</span>
-            )}
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <input
-              type="checkbox"
-              id="isPublished"
-              checked={courseData.isPublished}
-              onChange={toggleIsPublished}
-              className="w-4 h-4 text-orange-500 focus:ring-orange-500 border-gray-300 rounded"
-            />
-            <label htmlFor="isPublished" className="text-sm font-medium text-gray-700">
-              Publish Course
-            </label>
-          </div>
-
-          {modules.map((module, index) => (
-            <div
-              key={index}
-              className="border border-orange-300 p-4 rounded-lg mb-4 bg-orange-50"
-            >
-              <input
-                type="text"
-                placeholder={`Module ${index + 1} Name`}
-                value={module.name}
-                onChange={(e) => handleModuleChange(index, e.target.value)}
-                className="w-full border border-orange-500 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 mb-4"
-              />
-
-              <label className="block text-orange-600 font-bold mb-2">
-                Upload Lectures
-              </label>
-              <input
-                type="file"
-                multiple
-                onChange={(e) =>
-                  handleLectureUpload(index, Array.from(e.target.files))
-                }
-                className="block border border-orange-500 p-2 rounded-lg w-full"
-              />
-
-              {module.lectures.length > 0 && (
-                <ul className="mt-2">
-                  {module.lectures.map((lecture, lectureIndex) => (
-                    <li key={lectureIndex} className="text-sm text-gray-700">
-                      {lecture.name}
-                    </li>
+            <h3 className="text-lg font-bold">Quiz</h3>
+            {module.quiz.map((question, qIndex) => (
+              <div key={qIndex} className="mb-4">
+                <input type="text" placeholder="Question" value={question.questionText} onChange={(e) => handleQuizChange(moduleIndex, qIndex, "questionText", e.target.value)} className="w-full border p-2 rounded mb-2" />
+                {question.options.map((option, oIndex) => (
+  <input
+    key={oIndex}
+    type="text"
+    placeholder={`Option ${oIndex + 1}`}
+    value={option} 
+    onChange={(e) => handleQuizChange(moduleIndex, qIndex, `options[${oIndex}]`, e.target.value)}
+    className="w-full border p-2 rounded mb-2"
+  />
+))}
+                <select onChange={(e) => handleQuizChange(moduleIndex, qIndex, "correctAnswerIndex", e.target.value)} className="w-full border p-2 rounded mb-2">
+                  {question.options.map((_, idx) => (
+                    <option key={idx} value={idx}>{`Option ${idx + 1}`}</option>
                   ))}
-                </ul>
-              )}
-
-              <label className="block text-orange-600 font-bold mb-2 mt-4">
-                Design Quizzes
-              </label>
-              <button
-                onClick={() => handleQuizDesign(index)}
-                className="w-full bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              >
-                Design Quiz
-              </button>
-
-              {module.quizzes.length > 0 && (
-                <ul className="mt-2">
-                  {module.quizzes.map((quiz, quizIndex) => (
-                    <li key={quizIndex} className="text-sm text-gray-700">
-                      {quiz.name}
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              {/* New Checkbox for Preview Free */}
-              <div className="flex items-center mt-4">
-                <input
-                  type="checkbox"
-                  checked={module.isPreviewFree}
-                  onChange={() => handlePreviewToggle(index)}
-                  className="w-4 h-4 text-orange-500 focus:ring-orange-500 border-gray-300 rounded"
-                />
-                <label className="ml-2 text-sm font-medium text-gray-700">
-                  Preview Free
-                </label>
+                </select>
               </div>
-            </div>
-          ))}
+            ))}
+            <button type="button" onClick={() => addQuizQuestion(moduleIndex)} className="bg-blue-500 text-white p-2 rounded">Add Quiz Question</button>
+          </div>
+        ))}
 
-          <button
-            onClick={addModule}
-            className="w-full bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
-          >
-            Add Module
-          </button>
-
-          <button
-            onClick={handleSubmit}
-            className="w-full bg-orange-600 text-white py-2 px-4 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 mt-4"
-          >
-            Publish Course
-          </button>
-        </div>
-      </div>
+        <button type="button" onClick={addModule} className="bg-green-500 text-white p-2 rounded">Add Module</button>
+        <button type="submit" className="bg-orange-500 text-white p-2 rounded ml-4">Publish Course</button>
+      </form>
     </div>
   );
 };

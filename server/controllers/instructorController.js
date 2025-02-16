@@ -1,8 +1,12 @@
-import { Course } from "../models/course.js";
-import { uploadMedia } from "../utils/cloudinary.js";
+import { Course } from "../models/course.js";  // ✅ Import Course Model
+import { uploadMedia } from "../utils/cloudinary.js";  // ✅ Function to upload files to Cloudinary
+import { uploadFiles } from "../utils/multer.js";  // ✅ Multer middleware to handle file uploads
 
 export const createCourse = async (req, res) => {
   try {
+    console.log("Incoming Request: ", req.body); // ✅ Log request body
+    console.log("Uploaded Files: ", req.files);  // ✅ Log uploaded files
+
     if (!req.user) {
       return res.status(401).json({ message: "Unauthorized access" });
     }
@@ -18,21 +22,50 @@ export const createCourse = async (req, res) => {
       const uploadResult = await uploadMedia(req.files.courseThumbnail[0].path);
       courseThumbnail = uploadResult.secure_url;
     }
+    // ✅ Log incoming request for debugging
+console.log("Incoming Modules:", modules);
 
-    const parsedModules = JSON.parse(modules); // ✅ Convert stringified JSON to an array
 
-    if (!Array.isArray(parsedModules)) {
-      return res.status(400).json({ message: "Invalid modules format." });
+
+
+    // Parse modules correctly
+    let parsedModules;
+    try {
+      parsedModules = JSON.parse(modules);
+      console.log("Parsed Modules after JSON Parse:", parsedModules); // ✅ Debugging Log
+      if (!Array.isArray(parsedModules)) throw new Error("Modules must be an array");
+    } catch (error) {
+      console.error("Error parsing modules: ", error);
+      return res.status(400).json({ message: "Invalid modules format" });
+    }
+    if (req.files && req.files.videoUrl) {
+      for (let i = 0; i < req.files.videoUrl.length; i++) {
+        const file = req.files.videoUrl[i];
+
+        // ✅ Upload video to Cloudinary
+        const uploadResult = await uploadMedia(file.path, "video"); // Make sure `uploadMedia` supports video uploads
+
+        if (parsedModules[i]) {
+          parsedModules[i].lecture = {
+            title: parsedModules[i].moduleTitle, // Assign title if needed
+            videoUrl: uploadResult.secure_url, // ✅ Save Cloudinary URL
+            publicId: uploadResult.public_id // ✅ Save Public ID
+          };
+        }
+      }
     }
 
-    // ✅ Assign uploaded videos to respective modules
-    if (req.files && req.files.lectureVideos) {
-      req.files.lectureVideos.forEach((file, index) => {
+    // ✅ Ensure uploaded videos are correctly mapped
+  /*  if (req.files && req.files.videoUrl) {
+      req.files.videoUrl.forEach((file, index) => {
         if (parsedModules[index]) {
-          parsedModules[index].lecture.videoUrl = `/uploads/${file.filename}`;
+          parsedModules[index].lecture = {
+            videoUrl: `/uploads/${file.filename}`,
+            publicId: file.filename, // ✅ Save Public ID
+          };
         }
       });
-    }
+    }*/
 
     const course = await Course.create({
       courseTitle,
@@ -48,6 +81,7 @@ export const createCourse = async (req, res) => {
     res.status(201).json({ course, message: "Course created successfully." });
 
   } catch (error) {
+    console.error("Internal Server Error: ", error);
     res.status(500).json({ message: "Failed to create course", error: error.message });
   }
 };

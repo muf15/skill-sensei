@@ -14,5 +14,5 @@ const upload = multer({ storage });
 // ✅ Middleware to handle course thumbnail & multiple lecture videos
 export const uploadFiles = upload.fields([
   { name: "courseThumbnail", maxCount: 1 },  // ✅ Single Thumbnail
-  { name: "lectureVideos", maxCount: 10 }   // ✅ Multiple Lectures
+  { name: "videoUrl", maxCount: 10 }   // ✅ Multiple Lectures
 ]);
