@@ -47,15 +47,33 @@ export const getCourseById = async (req, res) => {
 };
 
 // Fetch module quiz
-export const getModuleQuiz = async (req, res) => {
-  const { courseId: _id } = req.params;
-
+// Fetch course quiz
+export const getCourseQuiz = async (req, res) => {
+  const { courseId } = req.params;
+  
   try {
-    const course = await Course.findById(_id);
-    if (!course) return res.status(404).json({ message: "Course not found!" });
+    console.log("Received request for course quiz. Course ID:", courseId);
+    
+    const course = await Course.findById(courseId);
+    console.log("Course fetched from DB:", course);
 
-    res.status(200).json(course.moduleQuiz);
+    if (!course) {
+      return res.status(404).json({ message: "Course not found!" });
+    }
+
+    console.log("Course structure:", JSON.stringify(course, null, 2)); // Log entire structure
+
+    if (!course.cquiz) {
+      return res.status(404).json({ message: "Course quiz not found for this course!" });
+    }
+
+    return res.status(200).json({ cquiz: course.cquiz });
   } catch (error) {
-    res.status(500).json({ message: "Server error!", error });
+    console.error("Error fetching course quiz:", error);
+    return res.status(500).json({ 
+      message: "Server error!", 
+      error: error.message,
+      stack: error.stack
+    });
   }
 };

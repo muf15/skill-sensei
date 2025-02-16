@@ -15,7 +15,8 @@ const moduleSchema = new mongoose.Schema({
         correctAnswerIndex: { type: Number, required: true }
       }
     ]
-  }
+  },
+  isPreview: { type: Boolean, default: false }
 });
 
 const courseSchema = new mongoose.Schema(
@@ -29,7 +30,16 @@ const courseSchema = new mongoose.Schema(
     difficulty: { type: String, enum: ["beginner", "intermediate", "advanced"],  },
     studentsEnrolled: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     isPublished: { type: Boolean, default: false },
-    price: { type: Number, required: true }
+    price: { type: Number, required: true },
+    cquiz:{
+      questions: [
+        {
+          questionText: { type: String, required: true },
+          options: [{ type: String, required: true }],
+          correctAnswerIndex: { type: Number, required: true }
+        }
+      ]
+    }
   },
   { timestamps: true }
 );
