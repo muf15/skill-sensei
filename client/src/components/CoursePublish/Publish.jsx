@@ -101,9 +101,15 @@ const Publish = () => {
     const formattedModules = modules.map(module => ({
       moduleTitle: module.moduleTitle,
       lecture: module.lecture ? {
-        title: module.moduleTitle, // ✅ Keep the lecture title same as module
+        title: module.moduleTitle,
       } : null,
-      quiz: module.quiz,
+      quiz: {
+        questions: module.quiz.map(question => ({
+          questionText: question.questionText,
+          options: question.options,
+          correctAnswerIndex: parseInt(question.correctAnswerIndex)
+        }))
+      }
     }));
   
     formData.append("modules", JSON.stringify(formattedModules));
