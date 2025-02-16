@@ -38,6 +38,7 @@ import Goals from "./components/WhoWeAre/Goals";
 import AiHeader from "./components/Ai/AIHeader";
 import ContactUs from "./components/Contact/Contactus";
 import Course from "./components/CoursePage/Course";
+import CourseViewer from "./components/CoursePage/CourseViewer";
 import Header from "./components/JobPage/Header";
 import CourseHeader from "./components/CoursePage/CourseHeader";
 import JobApplyPage from "./components/JobPage/JobApplyPage";
@@ -114,7 +115,8 @@ const App = () => {
             element={
               <div>
                 <CourseHeader/>
-                <Course /> 
+                {/* <Course /> */}
+                <CourseViewer /> 
                 <QuoteSection/>
               </div>
             }
@@ -131,7 +133,7 @@ const App = () => {
             }
           />
          <Route
-            path="/lessonlist"
+            path="/view-course"
             element={
               <div>
                 <Mainheader/>
