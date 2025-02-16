@@ -1,5 +1,5 @@
 import React from "react";
-
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 const QuoteSection = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -9,6 +9,8 @@ const QuoteSection = () => {
         accessible, and innovative learning experiences that equip individuals with the skills they
         need to excel in today’s fast-evolving digital world.”
       </p>
+      
+
     </div>
   );
 };
