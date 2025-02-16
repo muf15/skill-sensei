@@ -92,7 +92,7 @@ const MockInterview = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-gray-100">
+    <div className="min-h-screen mt-24 bg-gradient-to-br from-white to-gray-100">
       {/* Header */}
       <header className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-8 px-4 shadow-lg">
         <div className="max-w-7xl mx-auto text-center">

@@ -30,7 +30,7 @@ import CourseSection from "./components/HomePage/CourseSection";
 import Testimonials from "./components/HomePage/Testimonials";
 import FAQ from "./components/HomePage/FAQ";
 import Video from "./components/SCreen3/Video";
-import ChillGuy from "./components/SCreen3/ChillGuy";
+import ChillGy from "./components/SCreen3/ChillGuy";
 import PracticeQuiz from "./components/QuizSCreen/PracticeQuiz";
 import WhoWeAre from "./components/WhoWeAre/WhoWeAre";
 import Achievements from "./components/WhoWeAre/Acievements";
@@ -47,10 +47,8 @@ import JobPostingForm from "./components/Jobposting/JobPostingForm";
 import VideoCallHeader from "./components/Videocall/VideoCallHeader";
 import MentorCard from "./components/Videocall/MentorCard";
 import QuoteSection from "./components/Videocall/QuoteSection";
-import BankingDashboard from "./components/Dashboard/BankingDashboard";
 import MCQ from "./components/ModuleQuiz/MCQ";
 import ContactHeader from "./components/Contact/ContactHeader";
-import Chat from "./components/Ai/Chat";
 import TeamSection from "./components/Contact/TeamSection";
 import ResumeBuilder from "./components/Resume/Resumebuilder";
 import Mockinterview from "./components/Resume/Mockinterview";
@@ -65,9 +63,11 @@ import FeedbackForm from "./components/Feedback/Feedbackform";
 import { AuthProvider } from "../src/AuthContext";
 
 import PaymentSuccess from "./components/payment/UpiPaymentScreen";
-import UpiPaymentScreen from "./components/payment/UpiPaymentScreen";
 import GeminiAssistant from "./components/Ai/GeminiAssistant";
 import Wallet from "./components/payment/Wallet";
+import Certificate from "./components/Certificates/Certificate";
+import CertificateVerification from "./components/Certificates/CertificateVerification.jsx";
+import StudentDashboard from "./components/Dashboard/StudentDashboard.jsx";
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
   projectId: 'YOUR_PROJECT_ID',
@@ -97,7 +97,7 @@ const App = () => {
             <div>
               <HeroSection />
               <QuoteSection/>
-              <VideoWithPlayButton />
+              
               <BenefitsSection />
               <CourseSection />
               <Testimonials />
@@ -124,8 +124,7 @@ const App = () => {
             element={
               <div>
                 <Publish/>
-                <UpiPaymentScreen/>
-              
+                
               
               </div>
             }
@@ -199,11 +198,26 @@ const App = () => {
           }
         />
         <Route
+          path="/certification"
+          element={
+            <div>
+             <Certificate
+  userName="Alice Smith"
+  courseTitle="Advanced React"
+  issueDate="2025-02-16"
+  geminiApiKey="AIzaSyAtV8nuqqKXDNbJ3yahxqGfzWxMBB-RmvU"
+/>
+<CertificateVerification/>
+             
+            </div>
+          }
+        />
+        <Route
           path="/dashboard"
           element={
             <div>
               
-              <BankingDashboard />
+              <StudentDashboard />
            
              
             </div>
@@ -288,7 +302,7 @@ const App = () => {
           element={
             <div>
               <AiHeader/>
-              <Chat/>
+              
               <GeminiAssistant/>
             </div>
           }
@@ -301,9 +315,30 @@ const App = () => {
             <div>
               <Resumeheader/>
               <ResumeBuilder/>
+              
+              
+            </div>
+          }
+        />
+        <Route
+          path="/mock-interview"
+          element={
+            <div>
+              
               <Mockinterview/>
+             
+            
+            </div>
+          }
+        />
+        <Route
+          path="/ai-auto-grade-test"
+          element={
+            <div>
+              
+             
               <InterviewComponent/>
-              <p>This is the content of the second new page.</p>
+            
             </div>
           }
         />

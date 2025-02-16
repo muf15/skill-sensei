@@ -74,28 +74,17 @@ const Navbar = () => {
         </li>
         <li>
           <Link
-            to="/ai"
+            to="/video-call"
             className="cursor-pointer hover:text-orange-400 transition-all duration-300"
           >
-            Sensie Bot
+            Mentorship
           </Link>
         </li>
-        <li>
-          <Link
-            to="/job"
-            className="cursor-pointer hover:text-orange-400 transition-all duration-300"
-          >
-            Jobs
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/resume"
-            className="cursor-pointer hover:text-orange-400 transition-all duration-300"
-          >
-            Resume
-          </Link>
-        </li>
+        
+        
+        
+       
+        
         <li>
           <Link
             to="/dashboard"

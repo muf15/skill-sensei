@@ -75,7 +75,7 @@ const InterviewComponent = () => {
   }, [skill]);
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex mt-24 min-h-screen">
       {/* --- NEW SIDEBAR --- */}
       <aside className="w-1/4 bg-white p-6 text-gray-800">
         <h2 className="text-xl font-extrabold mb-6 uppercase">PRACTICE QUIZ</h2>

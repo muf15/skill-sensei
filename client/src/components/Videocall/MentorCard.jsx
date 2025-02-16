@@ -16,7 +16,7 @@ const MentorCard = () => {
             <div className="flex flex-col items-center">
               <div className="w-48 h-48 rounded-full border-4 border-white overflow-hidden mb-4">
                 <img
-                  src="/api/placeholder/200/200"
+                  src="https://apiwp.thelocal.com/cdn-cgi/image/format=webp,width=1200,quality=75/https://apiwp.thelocal.com/wp-content/uploads/2018/12/6d67730d16af04f3f956389d4cc244af808b8381c23b1e3d218ecd792de14fa8.jpg"
                   alt="Mentor Profile"
                   className="w-full h-full object-cover"
                 />
