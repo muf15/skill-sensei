@@ -1,6 +1,6 @@
-# 🧠 Skill Sensie
+# 🧠 Skill Sensei
 
-**Skill Sensie** is a smart upskilling platform that helps individuals identify their weak areas and grow by providing personalized learning paths and curated resources. Whether you're a student, developer, or professional, Skill Sensie acts as your personal learning guide.
+**Skill Sensei** is a smart upskilling platform that helps individuals identify their weak areas and grow by providing personalized learning paths and curated resources. Whether you're a student, developer, or professional, Skill Sensei acts as your personal learning guide.
 
 ---
 
@@ -11,27 +11,27 @@
 - 📚 **Curated Content** – Hand-picked videos, articles, and courses from trusted platforms.
 - 🧩 **Progress Tracking** – Visual indicators to monitor skill growth and completed modules.
 - 🎮 **Gamified Experience** – Points, levels, and achievements to keep users engaged.
-- 🧠 **AI-Based Suggestions** *(Planned)* – Use AI to dynamically suggest content based on performance and trends.
+- 🧠 **AI-Based Suggestions** _(Planned)_ – Use AI to dynamically suggest content based on performance and trends.
 
 ---
 
 ## 🛠 Tech Stack
 
-| Tech         | Usage                          |
-|--------------|--------------------------------|
-| **React.js** | Frontend user interface        |
-| **Node.js**  | Backend APIs                   |
-| **Express**  | Server-side logic              |
-| **MongoDB**  | User data & skill storage      |
-| **Tailwind** | Styling & responsive design    |
-| **Chart.js** | Progress and skill visualization |
-| *(Planned)*  | OpenAI/Gemini API for smart content recommendations |
+| Tech         | Usage                                               |
+| ------------ | --------------------------------------------------- |
+| **React.js** | Frontend user interface                             |
+| **Node.js**  | Backend APIs                                        |
+| **Express**  | Server-side logic                                   |
+| **MongoDB**  | User data & skill storage                           |
+| **Tailwind** | Styling & responsive design                         |
+| **Chart.js** | Progress and skill visualization                    |
+| _(Planned)_  | OpenAI/Gemini API for smart content recommendations |
 
 ---
 
 ## 📸 Screenshots
 
-> *(Add images or GIFs of the homepage, dashboard, and recommendations section)*
+> _(Add images or GIFs of the homepage, dashboard, and recommendations section)_
 
 ---
 
@@ -49,13 +49,14 @@
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/skill-sensie.git
+git clone https://github.com/muf15/skill-sensei.git
 
 # Navigate to the project folder
-cd skill-sensie
+cd skill-sensei
 
 # Install dependencies
 npm install
 
 # Start the development server
 npm run dev
+```

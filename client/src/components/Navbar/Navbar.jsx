@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
 
 const Navbar = () => {
-  const { isLoggedIn, userId, logout, checkAuthStatus } = useContext(AuthContext);
+  const { isLoggedIn, userId, logout, checkAuthStatus } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -21,7 +22,7 @@ const Navbar = () => {
   };
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(prev => !prev);
+    setIsMobileMenuOpen((prev) => !prev);
   };
 
   return (
@@ -80,11 +81,7 @@ const Navbar = () => {
             Mentorship
           </Link>
         </li>
-        
-        
-        
-       
-        
+
         <li>
           <Link
             to="/dashboard"
@@ -128,7 +125,10 @@ const Navbar = () => {
 
         {/* Hamburger Icon for Mobile (visible only on small screens) */}
         <div className="md:hidden">
-          <button onClick={toggleMobileMenu} className="text-gray-300 focus:outline-none">
+          <button
+            onClick={toggleMobileMenu}
+            className="text-gray-300 focus:outline-none"
+          >
             {isMobileMenuOpen ? (
               <svg
                 className="w-6 h-6"
@@ -210,7 +210,7 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block hover:text-orange-400 transition-all duration-300"
               >
-                Sensie Bot
+                Sensei Bot
               </Link>
             </li>
             <li>
